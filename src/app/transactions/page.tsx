@@ -2,7 +2,7 @@
 
 import Icon from "@/components/common/icon"
 
-export default function Onboarding() {
+export default function MyTransactions() {
   return (
     <div className="bg-base-100 text-primary-content">
       <h1 className="text-4xl ">My Transactions</h1>

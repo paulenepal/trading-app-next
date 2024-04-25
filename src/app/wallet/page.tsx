@@ -2,7 +2,7 @@
 
 import Icon from "@/components/common/icon"
 
-export default function Onboarding() {
+export default function Wallet() {
   return (
     <div className="bg-base-100 text-primary-content">
       <h1 className="text-4xl ">Your Total Value</h1>
