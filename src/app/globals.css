@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  /* @apply px-12 py-8 pl-32; Initial: can change :thumbs_up: */
   font-family: 'Poppins', sans-serif;
+  @apply bg-neutral;
 }
 
 * {
