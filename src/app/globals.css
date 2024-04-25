@@ -5,12 +5,12 @@
 @tailwind utilities;
 
 :root {
-  /* @apply px-12 py-8 pl-32; Initial: can change :thumbs_up: */
   font-family: 'Poppins', sans-serif;
+  @apply bg-neutral;
 }
 
 * {
-  outline: red 1px solid;
+  /* outline: red 1px solid; */
 }
 
 .page-container {
