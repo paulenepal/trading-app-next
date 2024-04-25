@@ -13,18 +13,14 @@
   /* outline: red 1px solid; */
 }
 
-.page-container {
-  @apply flex flex-col items-center justify-center;
-}
-
 @layer utilities {
   .page-container {
     @apply flex flex-col items-center justify-center;
   }
-}
-
-/* @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .fade-in {
+    @apply animate-fade-down animate-once animate-duration-[400ms] animate-ease-out animate-normal;
   }
-} */
+  .fade-out {
+    @apply animate-fade animate-once animate-duration-[400ms] animate-ease-out animate-reverse;
+  }
+}

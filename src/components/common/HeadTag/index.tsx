@@ -17,20 +17,27 @@ const HeadTag = ({
   containerStyle 
 }: HeadTagProps) => {
   const [visible, setVisible] = useState(true);
+  const [fade, setFade] = useState(true);
 
   const onButtonClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    setVisible(false);
+    // delay the visibility to show the fade-out animation
+    setFade(false);
+    setTimeout(() => {
+      setVisible(false);
+    }, 500);
   }
   return (
-    <div className={visible ? `visible` : `hidden`}>
-      <div className={cn(`flex flex-row justify-center items-center py-2 gap-2 &>*:h-full ${containerStyle}`)}>
-        { icon ? <i className={cn(`font-bold ri-${icon}`)}></i> : null}
-        { title ? <h1 className="font-bold">{title}</h1> : null }
-        { description ? <h2>{description}</h2> : null}
+    visible ? (
+      <div className={cn(fade ? `fade-in` : `fade-out`,`absolute w-full`)}>
+        <div className={cn(`flex flex-row justify-center items-center py-2 gap-2 &>*:h-full ${containerStyle}`)}>
+          { icon ? <i className={cn(`font-bold ri-${icon}`)}></i> : null}
+          { title ? <h1 className="font-bold">{title}</h1> : null }
+          { description ? <h2>{description}</h2> : null}
+        </div>
+        <button className="absolute top-1 left-1 text-info-content btn btn-circle btn-sm btn-ghost" onClick={onButtonClick}>X</button>
       </div>
-      <button className="absolute top-1 left-1 text-info-content btn btn-circle btn-sm btn-ghost" onClick={onButtonClick}>X</button>
-    </div>
+    ) : null
   );
 }
 
