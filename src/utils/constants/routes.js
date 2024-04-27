@@ -5,4 +5,10 @@ import Onboarding from "@/app/onboarding/page";
 export const MAIN_ROUTES = {
   HOME: '/',
   ONBOARDING: '/onboarding',
+  DASHBOARD: '/dashboard',
+  MARKET: '/market',
+  PORTFOLIO: '/portfolio',
+  TRANSACTIONS: '/transactions',
+  WALLET: '/wallets',
+  ACCOUNT: '/account'
 };
