@@ -22,7 +22,7 @@ export default function LandingHero() {
             </div>
             <h1 className="flex flex-col justify-end text-2xl md:text-3xl lg:text-3xl xl:text-7xl font-bold w-full h-full leading-tight">
               Your Gateway
-              <p>to Smarter Trading</p>
+              <p>to <HighlightText>Smarter Trading</HighlightText></p>
             </h1>
           </div>
 
@@ -30,21 +30,21 @@ export default function LandingHero() {
             <div className="flex flex-row items-center justify-center h-full w-full bg-primary rounded-3xl text-neutral shadow-xl">
               
               <div className='ml-12 w-1/2'>
-                <p className="font-normal text-pretty w-5/6 mb-7 text-lg">
-                  <HighlightText>Welcome to the future of stock trading!</HighlightText> <br />
+                <p className="font-light text-pretty w-5/6 mb-7 text-lg">
+                  <span className='font-bold'><HighlightText>Welcome to the future of stock trading!</HighlightText> <br /></span>
                   Navigate the highs and lows with confidence. Our platform is designed to help you make informed decisions and trade with ease.
                 </p>
                 <div className="flex flex-row gap-4">
                   <Link 
                     href={MAIN_ROUTES.ONBOARDING}
-                    className="btn btn-wide font-normal btn-info shadow-md">
+                    className="btn btn-wide font-normal btn-info">
                     Get Started{' '}
                     <Icon
                       iconName="arrow-right-s-line"
                       className="text-info-content text-xl"
                     />
                   </Link>
-                  <button className="btn btn-outline btn-neutral text-neutral font-normal shadow-md">
+                  <button className="btn btn-outline btn-neutral text-neutral font-normal">
                     Explore
                     <Icon
                       iconName="global-line"
