@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <GlobalLayoutProvider>
+    <>
       <HeadTag description="Create Your Free Account Now!" icon="information-line" containerStyle="bg-info text-info-content"/>
       <LandingHero />
-    </GlobalLayoutProvider>
+    </>
   );
 }

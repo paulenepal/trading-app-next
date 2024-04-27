@@ -23,4 +23,14 @@
   .fade-out {
     @apply animate-fade animate-once animate-duration-[400ms] animate-ease-out animate-reverse;
   }
+  .text-transition {
+    @apply transition-all ease-in-out hover:opacity-100;
+  }
 }
+
+/* For Onboarding Forms */
+@layer utilities {
+  .form-input {
+    @apply input input-ghost input-secondary active:outline-none bg-transparent flex items-center gap-2;
+  }
+} 
