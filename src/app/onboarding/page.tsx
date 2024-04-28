@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+import axios from 'axios';
+import { API_URL, SIGN_UP_REQUEST_HEADERS } from '@/utils/constants/services';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
 
 import Icon from '@/components/common/icon';
-// import { AlertBox } from '@/components/common/AlertBox';
 
 import {
   ONBOARDING_TYPE,
@@ -16,9 +15,11 @@ import {
   ONBOARDING_PROPS,
   SIGN_IN_INPUT,
   SIGN_UP_INPUT,
-} from '@/utils/types/onb-types';
+} from '@/utils/types/onbtypes';
 
-import OnboardingLayoutProvider from '@/components/common/OnboardingLayoutProvider';
+import OnboardingLayoutProvider from '@/components/providers/OnboardingLayoutProvider';
+import AlertBox from '@/components/common/AlertBox';
+import FormErrorMessage from '@/components/common/ErrorMessage';
 
 export default function Onboarding() {
   const [type, setType] = useState<ONBOARDING_TYPE>('SIGN_IN');
@@ -91,6 +92,12 @@ export default function Onboarding() {
   );
 }
 
+const renderAlertBox = (error: boolean, errorMessage: string | null) => {
+  if (error) {
+    return <AlertBox type="warning">{errorMessage}</AlertBox>;
+  }
+};
+
 const SignInForm = ({ type }: ONBOARDING_PROPS) => {
   const {
     register,
@@ -107,24 +114,44 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
 
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);
-    console.log(error)
-    console.log(errorMessage)
+    console.log(error);
+    console.log(errorMessage);
   };
 
   const onSubmit: SubmitHandler<SIGN_IN_INPUT> = (data) => {
+    console.log(data);
     handleSignin(data);
     setTimeout(() => (setErrorMessage(null), setError(false)), 5000);
   };
 
-  const handleSignin = (user: SIGN_IN_INPUT) => {
-    console.log(user);
-  };
+  async function handleSignin(user: SIGN_IN_INPUT) {
+    try {
+      const response = await axios.post(`${API_URL}/signin`, {
+        user: {
+          email: user.email,
+          password: user.password,
+        },
+        header: SIGN_UP_REQUEST_HEADERS,
+      });
+      const userData = response.data.status.data.user;
+      const userHeader = response.headers['authorization'];
+      sessionStorage.setItem('user', JSON.stringify(userData));
+      sessionStorage.setItem('token', userHeader);
+      setError(false);
+      setErrorMessage(null);
+      console.log(userData.role, userData)
+      userData.role === 'pending_trader' || userData.role === 'trader' ? router.push('/dashboard') : router.push('/admin');
+    } catch (error) {
+      setError(true);
+      setErrorMessage((error as Object)?.response?.data?.error);
+    }
+  }
 
   return (
     <form
       key={type}
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col max-md:w-full w-1/3 justify-center gap-6 mt-6 animate-fade animate-delay-100 animate-once animate-ease-in"
+      className="flex flex-col max-md:w-full max-2xl:w-2/3 w-1/4 justify-center gap-6 mt-6 animate-fade animate-delay-100 animate-once animate-ease-in"
     >
       <label htmlFor="input-email" className="form-input">
         <Icon iconName="mail-fill text-primary" />
@@ -146,7 +173,7 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
       <label className="form-input">
         <Icon iconName="key-fill text-primary" />
         <input
-          id='input-password'
+          id="input-password"
           type={!viewPassword ? 'password' : 'text'}
           className="grow"
           placeholder="Password"
@@ -164,6 +191,30 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
           <Icon iconName="eye-off-fill text-primary-content swap-off" />
         </label>
       </label>
+
+      {/* Error Messages */}
+      {renderAlertBox(error, errorMessage)}
+      {errors.email || errors.password ? (
+        <div className="alert alert-warning animate-fade animate-once animate-ease-in">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <div className="flex flex-col gap-0">
+            {FormErrorMessage({ formName: 'email', errors })}
+            {FormErrorMessage({ formName: 'password', errors })}
+          </div>
+        </div>
+      ) : null}
 
       <input
         type="submit"
@@ -194,18 +245,36 @@ const SignUpForm = ({ type }: ONBOARDING_PROPS) => {
     setViewConfirmPassword(!viewConfirmPassword);
 
   const onSubmit: SubmitHandler<SIGN_UP_INPUT> = (data) => {
-    handleSignin(data);
+    handleSignUp(data);
     setTimeout(() => (setErrorMessage(null), setError(false)), 5000);
   };
 
-  const handleSignin = (user: SIGN_UP_INPUT) => {
-    console.log(user);
-  };
+  async function handleSignUp(user: SIGN_UP_INPUT) {
+    try {
+      await axios.post(`${API_URL}/signup`, {
+        user: {
+          email: user.email,
+          password: user.password,
+          first_name: user.firstName,
+          last_name: user.lastName,
+          username: user.username,
+          birthday: user.birthDate,
+          role: 0,
+        },
+      });
+      setError(false);
+      setErrorMessage(null);
+      location.reload();
+    } catch (error) {
+      setError(true);
+      setErrorMessage('Invalid Email or Password');
+    }
+  }
 
   return (
     <form
       key={type}
-      className="flex flex-col  max-md:w-full  w-2/3 justify-center gap-6 mt-6 animate-fade animate-delay-100 animate-once animate-ease-in"
+      className="flex flex-col max-md:w-full max-xl:w-2/3 w-2/4 justify-center gap-6 mt-6 animate-fade animate-delay-100 animate-once animate-ease-in"
       onSubmit={handleSubmit(onSubmit)}
     >
       <label htmlFor="input-email" className="form-input">
@@ -254,7 +323,7 @@ const SignUpForm = ({ type }: ONBOARDING_PROPS) => {
               required: 'First name is Required',
               pattern: {
                 value: ONBOARDING_REGEX.FIRSTNAME,
-                message: 'Invalid input',
+                message: 'Invalid Input on First Name',
               },
             })}
           />
@@ -271,7 +340,7 @@ const SignUpForm = ({ type }: ONBOARDING_PROPS) => {
               required: 'Last name is Required',
               pattern: {
                 value: ONBOARDING_REGEX.LASTNAME,
-                message: 'Invalid input',
+                message: 'Invalid Input on Last Name',
               },
             })}
           />
@@ -287,6 +356,9 @@ const SignUpForm = ({ type }: ONBOARDING_PROPS) => {
           max="2003-12-12"
           className="grow"
           placeholder="Birthday"
+          {...register('birthDate', {
+            required: 'Birthdate is Required',
+          })}
         />
       </label>
 
@@ -314,7 +386,7 @@ const SignUpForm = ({ type }: ONBOARDING_PROPS) => {
       <label className="form-input">
         <Icon iconName="key-fill text-primary" />
         <input
-          id='input-confirmpassword'
+          id="input-confirmpassword"
           type={!viewConfirmPassword ? 'password' : 'text'}
           className="grow"
           placeholder="Confirm Password"
@@ -322,10 +394,9 @@ const SignUpForm = ({ type }: ONBOARDING_PROPS) => {
             required: 'Confirm Password is Required',
             validate: (val: string) => {
               if (watch('password') != val) {
-                return "Your passwords do no match";
+                return 'Your passwords do no match';
               }
             },
-            
           })}
         />
         <label className="swap">
@@ -334,6 +405,41 @@ const SignUpForm = ({ type }: ONBOARDING_PROPS) => {
           <Icon iconName="eye-off-fill text-primary-content swap-off" />
         </label>
       </label>
+
+      {/* Error Messages */}
+      {renderAlertBox(error, errorMessage)}
+      {errors.email ||
+      errors.password ||
+      errors.firstName ||
+      errors.lastName ||
+      errors.confirmpassword ||
+      errors.birthDate ||
+      errors.username ? (
+        <div className="alert alert-warning animate-fade animate-once animate-ease-in">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="stroke-current shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <div className="flex flex-col gap-0">
+            {FormErrorMessage({ formName: 'email', errors })}
+            {FormErrorMessage({ formName: 'password', errors })}
+            {FormErrorMessage({ formName: 'username', errors })}
+            {FormErrorMessage({ formName: 'firstName', errors })}
+            {FormErrorMessage({ formName: 'lastName', errors })}
+            {FormErrorMessage({ formName: 'confirmpassword', errors })}
+            {FormErrorMessage({ formName: 'birthDate', errors })}
+          </div>
+        </div>
+      ) : null}
 
       <input
         type="submit"

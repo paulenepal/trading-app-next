@@ -1,6 +1,6 @@
 'use client';
 
-import ContentLayoutProvider from '@/components/common/ContentLayoutProvider';
+import ContentLayoutProvider from '@/components/providers/ContentLayoutProvider';
 import HighlightText from '@/components/common/Texts/HighlightText';
 import Footer from '@/components/common/Footer';
 import Logo from '@/components/common/Logo';
