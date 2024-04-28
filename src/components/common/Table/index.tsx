@@ -21,7 +21,7 @@ export default function Table({ columns, rows }) {
           {rows.map((row, rowIndex) => (
             <tr key={rowIndex}>
               <td>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-4">
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
                       <img src={row.logo} alt={row.symbol} />
