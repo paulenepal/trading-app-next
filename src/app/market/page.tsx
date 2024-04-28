@@ -1,16 +1,12 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
-import GlobalLayoutProvider from "@/components/providers/GlobalLayoutProvider";
-import MainContentLayout from "@/components/common/MainContentLayout";
-import NavBar from "@/components/common/NavBar";
-import Table from "@/components/resources/market/main";
-import CommonTable from "@/components/common/Table";
+import React, { useState, useEffect, useMemo } from "react";
 
-import { StockColumn } from "@/utils/types/stocktypes";
-import { GetIEXStocks, GetToken, GetUserInfo } from "@/utils/helpers/services";
-import { StockData } from "@/utils/types/stocktypes";
-import axios from "axios";
+import MainContentLayout from "@/components/providers/MainContentLayout";
+import Table from "@/components/common/Table";
+
+import { StockColumn, StockData } from "@/utils/types/stocktypes";
+import { GetIEXStocks, GetToken } from "@/utils/helpers/services";
 
 export default function StockMarket() {
   const [stocks, setStocks] = useState<StockData[]>([]);
@@ -34,34 +30,14 @@ export default function StockMarket() {
     fetchStocks();
   }, []);
 
+  const memorizedStocks = useMemo(() => stocks, [stocks]);
 
   return (
-    <GlobalLayoutProvider>
-      <div className="flex">
-      <NavBar />
-        <MainContentLayout>
-          <div className="bg-base-100 text-primary-content mt-10">
-            <h1 className="text-3xl">Stock Market</h1>
-          </div>
-          {/* <CommonTable columns={StockColumn} rows={StockData} /> */}
-
-          <ul className="text-black">
-            {
-              stocks.map((stock) => {
-                return (
-                  <li key={stock.symbol}>
-                    <p>{stock.symbol}
-                    {stock.latest_price}
-                    {stock.change}
-                    </p>
-                  </li>
-                )
-              })
-            }
-          </ul>
-
-        </MainContentLayout>
+    <MainContentLayout>
+      <div className="bg-base-100 text-primary-content mt-10">
+        <h1 className="text-3xl">Stock Market</h1>
       </div>
-    </GlobalLayoutProvider>
+      <Table columns={StockColumn} rows={memorizedStocks} />
+    </MainContentLayout>
   )
 }
