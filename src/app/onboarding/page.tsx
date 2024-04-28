@@ -17,7 +17,7 @@ import {
   SIGN_UP_INPUT,
 } from '@/utils/types/onbtypes';
 
-import OnboardingLayoutProvider from '@/components/common/OnboardingLayoutProvider';
+import OnboardingLayoutProvider from '@/components/providers/OnboardingLayoutProvider';
 import AlertBox from '@/components/common/AlertBox';
 import FormErrorMessage from '@/components/common/ErrorMessage';
 
@@ -126,7 +126,7 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
 
   async function handleSignin(user: SIGN_IN_INPUT) {
     try {
-      const response = await axios.post(`${API_URL}signin`, {
+      const response = await axios.post(`${API_URL}/signin`, {
         user: {
           email: user.email,
           password: user.password,
@@ -139,7 +139,8 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
       sessionStorage.setItem('token', userHeader);
       setError(false);
       setErrorMessage(null);
-      router.push('/');
+      console.log(userData.role, userData)
+      userData.role === 'pending_trader' || userData.role === 'trader' ? router.push('/dashboard') : router.push('/admin');
     } catch (error) {
       setError(true);
       setErrorMessage((error as Object)?.response?.data?.error);
