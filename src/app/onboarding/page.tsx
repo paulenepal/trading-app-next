@@ -17,7 +17,7 @@ import {
   SIGN_UP_INPUT,
 } from '@/utils/types/onbtypes';
 
-import OnboardingLayoutProvider from '@/components/common/OnboardingLayoutProvider';
+import OnboardingLayoutProvider from '@/components/providers/OnboardingLayoutProvider';
 import AlertBox from '@/components/common/AlertBox';
 import FormErrorMessage from '@/components/common/ErrorMessage';
 

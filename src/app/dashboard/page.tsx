@@ -1,13 +1,17 @@
 'use client'
 
+import SideNavigation from "@/components/common/SideNavigation"
 import Icon from "@/components/common/icon"
+import UserLayoutProvider from "@/components/providers/UserLayoutProvider"
 
 export default function Dashboard() {
   return (
-    <div className="bg-base-100 text-primary-content">
-      <h1 className="text-4xl ">Dashboard</h1>
-      <p className="text-lg">localhost:3000/dashboard</p>
-      <Icon iconName="user-fill" className="text-purple-400 text-4xl" ></Icon>
-    </div>
+    <>
+      <SideNavigation type={'user'}/>
+      <UserLayoutProvider>
+        
+        asdsa
+      </UserLayoutProvider>
+    </>
   )
 }

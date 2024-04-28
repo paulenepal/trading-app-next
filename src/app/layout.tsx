@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import GlobalLayoutProvider from "@/components/common/GlobalLayoutProvider";
+import GlobalLayoutProvider from "@/components/providers/GlobalLayoutProvider";
 
 export const metadata: Metadata = {
   title: "Trails: Stock Trading Platform",

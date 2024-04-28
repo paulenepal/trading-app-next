@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import GlobalLayoutProvider from "@/components/common/GlobalLayoutProvider";
+import GlobalLayoutProvider from "@/components/providers/GlobalLayoutProvider";
 import LandingHero from "@/components/resources/landing/hero";
 import HeadTag from "@/components/common/HeadTag";
 
