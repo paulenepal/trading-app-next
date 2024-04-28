@@ -7,7 +7,6 @@ import UserLayoutProvider from "@/components/providers/UserLayoutProvider"
 export default function Dashboard() {
   return (
     <>
-      <SideNavigation type={'user'}/>
       <UserLayoutProvider>
         
         asdsa
