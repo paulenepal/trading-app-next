@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
+
+import { API_URL, SIGN_UP_REQUEST_HEADERS } from '@/utils/constants/services';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
@@ -16,9 +19,10 @@ import {
   ONBOARDING_PROPS,
   SIGN_IN_INPUT,
   SIGN_UP_INPUT,
-} from '@/utils/types/onb-types';
+} from '@/utils/types/onbtypes';
 
 import OnboardingLayoutProvider from '@/components/common/OnboardingLayoutProvider';
+import AlertBox from '@/components/common/AlertBox';
 
 export default function Onboarding() {
   const [type, setType] = useState<ONBOARDING_TYPE>('SIGN_IN');
@@ -91,6 +95,18 @@ export default function Onboarding() {
   );
 }
 
+const renderAlertBox = (error: boolean, errorMessage: string | null) => {
+  if (error) {
+    return (
+      <AlertBox
+        type="warning"
+      >
+        {errorMessage}
+      </AlertBox>
+    );
+  }
+}
+
 const SignInForm = ({ type }: ONBOARDING_PROPS) => {
   const {
     register,
@@ -112,13 +128,34 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
   };
 
   const onSubmit: SubmitHandler<SIGN_IN_INPUT> = (data) => {
+    console.log(data)
     handleSignin(data);
     setTimeout(() => (setErrorMessage(null), setError(false)), 5000);
   };
 
-  const handleSignin = (user: SIGN_IN_INPUT) => {
-    console.log(user);
-  };
+  async function handleSignin(user: SIGN_IN_INPUT) {
+    try {
+      const response = await axios.post(`http://localhost:3001/signin`, {
+        user: {
+          email: user.email,
+          password: user.password
+        },
+        header: SIGN_UP_REQUEST_HEADERS
+      })
+      console.log(response)
+      const userData = response.data.status.data.user;
+      const userHeader = response.headers['authorization'];
+      sessionStorage.setItem('user', JSON.stringify(userData));
+      sessionStorage.setItem('token', userHeader);
+      setError(false);
+      setErrorMessage(null);
+      router.push('/');
+    } catch (error) {
+      console.log(error)
+      setError(true);
+      setErrorMessage((error as Object)?.response?.data?.error)
+    }
+  }
 
   return (
     <form
@@ -164,7 +201,7 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
           <Icon iconName="eye-off-fill text-primary-content swap-off" />
         </label>
       </label>
-
+      {renderAlertBox(error, errorMessage)}
       <input
         type="submit"
         value={ONBOARDING_COPY.SIGN_IN.BUTTON}
