@@ -28,7 +28,7 @@ export const USER_NAV_ROUTES = [
   },
   {
     text: 'Transactions',
-    iconName: 'bank-card-fill',
+    iconName: 'arrow-left-right-line',
     routeTo: USER_ROUTES.TRANSACTIONS
   },
   {
@@ -40,5 +40,41 @@ export const USER_NAV_ROUTES = [
     text: 'Market',
     iconName: 'funds-box-fill',
     routeTo: USER_ROUTES.MARKET
+  }
+]
+
+export const ADMIN_ROUTES = {
+  DASHBOARD: '/admin',
+  ACCOUNTS: '/admin/accounts',
+  APPROVALS: '/admin/pending',
+  USER_TRANSACTIONS: '/admin/user_transactions',
+  MARKET: '/market',
+}
+
+export const ADMIN_NAV_ROUTES = [
+  {
+    text: 'Dashboard',
+    iconName: 'home-fill',
+    routeTo: ADMIN_ROUTES.DASHBOARD
+  },
+  {
+    text: 'Accounts',
+    iconName: 'file-list-fill',
+    routeTo: ADMIN_ROUTES.ACCOUNTS
+  },
+  {
+    text: 'Approvals',
+    iconName: 'checkbox-circle-fill',
+    routeTo: ADMIN_ROUTES.APPROVALS
+  },
+  {
+    text: 'Transactions',
+    iconName: 'arrow-left-right-line',
+    routeTo: ADMIN_ROUTES.USER_TRANSACTIONS
+  },
+  {
+    text: 'Market',
+    iconName: 'funds-box-fill',
+    routeTo: ADMIN_ROUTES.MARKET
   }
 ]
