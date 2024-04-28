@@ -13,18 +13,24 @@
   /* outline: red 1px solid; */
 }
 
-.page-container {
-  @apply flex flex-col items-center justify-center;
-}
-
 @layer utilities {
   .page-container {
     @apply flex flex-col items-center justify-center;
   }
+  .fade-in {
+    @apply animate-fade-down animate-once animate-duration-[400ms] animate-ease-out animate-normal;
+  }
+  .fade-out {
+    @apply animate-fade animate-once animate-duration-[400ms] animate-ease-out animate-reverse;
+  }
+  .text-transition {
+    @apply transition-all ease-in-out hover:opacity-100;
+  }
 }
 
-/* @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* For Onboarding Forms */
+@layer utilities {
+  .form-input {
+    @apply input input-ghost input-secondary active:outline-none bg-transparent flex items-center gap-2;
   }
-} */
+} 
