@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { API_URL, SIGN_UP_REQUEST_HEADERS } from '@/utils/constants/services';
@@ -15,7 +15,6 @@ import {
   ONBOARDING_PROPS,
   SIGN_IN_INPUT,
   SIGN_UP_INPUT,
-  SIGN_UP_PROPS,
 } from '@/utils/types/onbtypes';
 
 import OnboardingLayoutProvider from '@/components/common/OnboardingLayoutProvider';
@@ -23,7 +22,7 @@ import AlertBox from '@/components/common/AlertBox';
 import FormErrorMessage from '@/components/common/ErrorMessage';
 
 export default function Onboarding() {
-  const [type, setType] = useState<ONBOARDING_TYPE>('SIGN_UP');
+  const [type, setType] = useState<ONBOARDING_TYPE>('SIGN_IN');
   const [onboardingMsg, setOnboardingMsg] = useState<string>(
     ONBOARDING_COPY[type].SUBTITLE
   );
