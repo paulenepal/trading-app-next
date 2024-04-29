@@ -28,10 +28,12 @@ export const GetIEXStocks = async () => {
 
 export const GetIEXStock = (symbol) => {
   try {
+    const token = GetToken();
     const response = axios.get(`${API_URL}/watchlist/${symbol}`, 
   {
     headers: {
-      Authorization: `${GetToken()}`,
+      'authorization': `${token}`,
+      'Accept': 'application/json'
     },
   });
     return response.data;
