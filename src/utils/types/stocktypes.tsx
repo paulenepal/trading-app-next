@@ -104,3 +104,9 @@ export const StockColumn = [
   { key: 'latest_price', label: 'Current Price' },
   { label: 'Trade' }
 ]
+
+export interface TableProps {
+  columns: { key: string; label: string } [];
+  rows: any[];
+  onClick: (row: StockData) => void;
+}
