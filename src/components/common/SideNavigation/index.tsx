@@ -11,7 +11,7 @@ import { useRouter, usePathname } from 'next/navigation';
 
 import Logo from '@/components/common/Logo';
 
-import { GetUserInfo } from '@/utils/constants/services';
+import { GetUserInfo, isConfirmed } from '@/utils/constants/services';
 import UserButton from '@/components/resources/SideNavigation/UserButton';
 import NavButton from '@/components/resources/SideNavigation/NavButton';
 import Link from 'next/link';
@@ -23,14 +23,13 @@ export default function SideNavigation({ type }: { type: string }) {
 
   const pathname = usePathname();
 
-  console.log(userInfo);
-
   useEffect(() => {
     setActiveRoute(pathname);
+    console.log(userInfo)
   }, [pathname]);
 
   return (
-    <div className="fixed bg-primary left-0 top-0 h-sidenav w-2/12 px-4 py-6 rounded-xl m-4">
+    <div className="fixed bg-primary left-0 top-0 h-sidenav w-auto px-4 py-6 rounded-xl m-4">
       {type === 'user' ? (
         <UserNav userInfo={userInfo} activeRoute={pathname} />
       ) : (
@@ -51,7 +50,7 @@ const UserNav = ({
     <div className="w-full h-full flex flex-col justify-between items-center *:w-full">
       {/* <Image alt='' src='/logo.svg' width={100} height={100} className='text' /> */}
       <div className="flex flex-col gap-4 h-full">
-        <div className="inline-flex w-auto flex-row justify-between items-center my-0 mx-4 max-md:justify-center">
+        <div className="inline-flex w-auto flex-row gap-8 justify-between items-center my-0 mx-4 max-md:justify-center">
           <Link
             href="/"
             className="font-bold text-2xl leading-none text-info hover:text-neutral text-transition fade-in max-md:hidden"
@@ -59,7 +58,7 @@ const UserNav = ({
             trails.io
           </Link>
           <div className="hidden max-md:block">
-            {userInfo.role !== 'trader' ? (
+            {isConfirmed() ? (
               <h1 className="text-info-content text-sm px-3 py-1.5 bg-info rounded-badge">
                 <Icon
                   iconName="checkbox-circle-fill"
@@ -76,7 +75,7 @@ const UserNav = ({
             )}
           </div>
           <div className="max-md:hidden">
-            {userInfo.role !== 'trader' ? (
+            {isConfirmed() ? (
               <h1 className="text-info-content text-sm px-3 py-1 bg-info rounded-badge flex flex-row gap-2 items-center">
                 <Icon
                   iconName="checkbox-circle-fill"
