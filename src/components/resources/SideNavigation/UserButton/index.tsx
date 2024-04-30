@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function UserButton({userInfo, activeRoute} : {userInfo: any, activeRoute: any}) {
   return (
     // btn-active
-    <Link href='/account' className={`btn btn-primary btn-outline ${(activeRoute === '/account') ? 'btn-active' : null} nav-button justify-start group`}>
+    <Link href='/account' className={`btn btn-primary btn-outline ${(activeRoute === '/account') ? 'btn-active' : null} nav-button justify-start group flex-1`}>
       <div className="bg-emerald-200 px-1.5 py-1.5 rounded-full group-hover:scale-110 transition-all ease-in-out">
         <Icon iconName='user-fill' className="text-primary-content" />
       </div>

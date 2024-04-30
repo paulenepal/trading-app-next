@@ -15,7 +15,8 @@ import { GetUserInfo, isConfirmed } from '@/utils/constants/services';
 import UserButton from '@/components/resources/SideNavigation/UserButton';
 import NavButton from '@/components/resources/SideNavigation/NavButton';
 import Link from 'next/link';
-import Icon from '../icon';
+import Icon from '@/components/common/icon';
+import SignOutButton from '@/components/resources/SideNavigation/SignOutButton';
 
 export default function SideNavigation({ type }: { type: string }) {
   const [userInfo, setUserInfo] = useState(GetUserInfo());
@@ -109,8 +110,9 @@ const UserNav = ({
           })}
         </div>
       </div>
-      <div>
+      <div className='flex max-lg:flex-col flex-row justify-between gap-4'>
         <UserButton userInfo={userInfo} activeRoute={activeRoute} />
+        <SignOutButton />
       </div>
     </div>
   );
