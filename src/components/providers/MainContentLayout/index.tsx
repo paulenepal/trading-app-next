@@ -7,10 +7,10 @@ import SideNavigation from "@/components/common/SideNavigation"
 export default function MainContentLayout({ children } : { children: ReactNode}) {
   return (
     <>
-    <SideNavigation type={'user'}/>
-    <div className="h-full w-full pl-80 ml-14 flex flex-col">
-      {children}
-    </div>
+      <SideNavigation type={'user'}/>
+      <div className="h-full w-auto pl-[18.8rem] ml-14 py-4 pr-4 flex flex-col gap-2">
+        {children}
+      </div>
     </>
   )
 }

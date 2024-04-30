@@ -1,9 +1,12 @@
 import React from 'react';
 import { TableProps } from '@/utils/types/stocktypes';
+import TablePlaceholder from '@/components/common/Placeholders/TablePlaceholder';
 
 export default function Table({ columns, rows, onClick, button }: TableProps) {
+  const isLoading = rows.length === 0;
+  const virtualizedRows = isLoading ? Array.from({ length: 10 }) : rows;
   return (
-    <div className="overflow-x-auto w-11/12">
+    <div className="overflow-x-auto w-full">
       <table className="table">
         {/* head */}
         <thead>
@@ -15,6 +18,9 @@ export default function Table({ columns, rows, onClick, button }: TableProps) {
         </thead>
         {/* body */}
         <tbody>
+          {isLoading && virtualizedRows.map((_, index) => (
+            <TablePlaceholder key={index} />
+          ))}
           {rows.map((row, rowIndex) => (
             <tr key={rowIndex} >
               <td>
@@ -44,14 +50,14 @@ export default function Table({ columns, rows, onClick, button }: TableProps) {
             </tr>
           ))}
         </tbody>
-        {/* foot */}
+        {/* foot
         <tfoot>
           <tr>
             {columns.map((column) => (
               <th key={column.key}>{column.label}</th>
             ))}
           </tr>
-        </tfoot>
+        </tfoot> */}
       </table>
     </div>
   );
