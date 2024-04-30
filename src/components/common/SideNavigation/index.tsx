@@ -57,25 +57,25 @@ const UserNav = ({
           >
             trails.io
           </Link>
-          <div className="hidden max-md:block">
-            {isConfirmed() ? (
-              <h1 className="text-info-content text-sm px-3 py-1.5 bg-info rounded-badge">
+          <div className="hidden max-md:flex">
+            {isConfirmed(userInfo.role) ? (
+              <h1 className="text-info-content text-sm px-3 py-3.5 bg-info rounded-badge">
                 <Icon
                   iconName="checkbox-circle-fill"
                   className="text-info-content text-lg"
                 />
               </h1>
             ) : (
-              <h1 className="text-info-content text-sm px-3 py-1.5 bg-info rounded-badge">
+              <h1 className="text-warning-content text-sm px-3 py-1.5 bg-warning rounded-badge">
                 <Icon
-                  iconName="error-info-fill"
-                  className="text-info-content text-lg"
+                  iconName="error-warning-fill"
+                  className="text-warning-content text-lg"
                 />
               </h1>
             )}
           </div>
           <div className="max-md:hidden">
-            {isConfirmed() ? (
+            {isConfirmed(userInfo.role) ? (
               <h1 className="text-info-content text-sm px-3 py-1 bg-info rounded-badge flex flex-row gap-2 items-center">
                 <Icon
                   iconName="checkbox-circle-fill"

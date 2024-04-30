@@ -1,3 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
+// eslint-disable-next-line @next/next/no-img-element
+
 import React from 'react';
 import Image from "next/image"
 
@@ -8,7 +11,7 @@ import {useRouter} from "next/navigation";
 export default function StockCard({ stockDetails }) {
   const router = useRouter();
   return (
-    <div className='carousel-item w-2/6'>
+    <div className='carousel-item w-[33%] max-md:w-full'>
       <div className="bg-white shadow-md rounded-lg overflow-hidden justify-between dark:bg-gray-900 flex flex-col flex-grow w-1/3">
         <div className="flex items-center p-4 md:p-6">
           <div className="flex-shrink-0">

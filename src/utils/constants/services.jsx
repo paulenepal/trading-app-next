@@ -17,7 +17,13 @@ export const GetToken = () => {
   return JSON.parse(sessionStorage.getItem('token'));
 }
 
-export const isConfirmed = () => {
-  const user = GetUserInfo();
-  return user.role === 'trader' ? true : false;
+export const isConfirmed = (role) => {
+  switch (role) {
+    case 'Pending':
+      return false;
+    case 'Trader':
+      return true;
+    default:
+      return false;
+  }
 }
