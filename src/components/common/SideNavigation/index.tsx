@@ -58,41 +58,43 @@ const UserNav = ({
           >
             trails.io
           </Link>
-          <div className="hidden max-md:flex">
-            {isConfirmed(userInfo.role) ? (
-              <h1 className="text-info-content text-sm px-3 py-3.5 bg-info rounded-badge">
-                <Icon
-                  iconName="checkbox-circle-fill"
-                  className="text-info-content text-lg"
-                />
-              </h1>
-            ) : (
-              <h1 className="text-warning-content text-sm px-3 py-1.5 bg-warning rounded-badge">
-                <Icon
-                  iconName="error-warning-fill"
-                  className="text-warning-content text-lg"
-                />
-              </h1>
-            )}
-          </div>
-          <div className="max-md:hidden">
-            {isConfirmed(userInfo.role) ? (
-              <h1 className="text-info-content text-sm px-3 py-1 bg-info rounded-badge flex flex-row gap-2 items-center">
-                <Icon
-                  iconName="checkbox-circle-fill"
-                  className="text-info-content text-lg"
-                />
-                Approved
-              </h1>
-            ) : (
-              <h1 className="text-warning-content text-sm px-3 py-1 bg-warning rounded-badge flex flex-row gap-2 items-center">
-                <Icon
-                  iconName="error-warning-fill"
-                  className="text-warning-content text-lg"
-                />
-                Pending
-              </h1>
-            )}
+          <div className='tooltip tooltip-right tooltip-base-100' data-tip={isConfirmed(userInfo.role) ? 'Verified Trader' : 'Pending Admin Approval'}>
+            <div className="hidden max-md:flex">
+              {isConfirmed(userInfo.role) ? (
+                <h1 className="text-info-content text-sm px-3 py-3.5 bg-info rounded-badge">
+                  <Icon
+                    iconName="checkbox-circle-fill"
+                    className="text-info-content text-lg"
+                  />
+                </h1>
+              ) : (
+                <h1 className="text-warning-content text-sm px-3 py-1.5 bg-warning rounded-badge">
+                  <Icon
+                    iconName="error-warning-fill"
+                    className="text-warning-content text-lg"
+                  />
+                </h1>
+              )}
+            </div>
+            <div className="max-md:hidden">
+              {isConfirmed(userInfo.role) ? (
+                <h1 className="text-info-content text-sm px-3 py-1 bg-info rounded-badge flex flex-row gap-2 items-center">
+                  <Icon
+                    iconName="checkbox-circle-fill"
+                    className="text-info-content text-lg"
+                  />
+                  Approved
+                </h1>
+              ) : (
+                <h1 className="text-warning-content text-sm px-3 py-1 bg-warning rounded-badge flex flex-row gap-2 items-center">
+                  <Icon
+                    iconName="error-warning-fill"
+                    className="text-warning-content text-lg"
+                  />
+                  Pending
+                </h1>
+              )}
+            </div>
           </div>
         </div>
         <div className="divider my-0 -mt-1" />
@@ -110,7 +112,7 @@ const UserNav = ({
           })}
         </div>
       </div>
-      <div className='flex max-lg:flex-col flex-row justify-between gap-4'>
+      <div className="flex max-lg:flex-col flex-row justify-between gap-4">
         <UserButton userInfo={userInfo} activeRoute={activeRoute} />
         <SignOutButton />
       </div>
