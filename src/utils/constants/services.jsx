@@ -19,9 +19,9 @@ export const GetToken = () => {
 
 export const isConfirmed = (role) => {
   switch (role) {
-    case 'Pending':
+    case 'pending_trader':
       return false;
-    case 'Trader':
+    case 'trader':
       return true;
     default:
       return false;
