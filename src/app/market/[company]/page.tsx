@@ -32,7 +32,7 @@ export default function Page({ params }: { params: {company: string}}) {
     <div>
       <h1>This Page is {params.company}</h1>
   
-        hey: {stock.latest_price}
+        {/* hey: {stock.latest_price} */}
 
     </div>
   );

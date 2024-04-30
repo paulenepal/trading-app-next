@@ -26,6 +26,22 @@ export const GetIEXStocks = async () => {
   }
 }
 
+export const getTopStocks = async () => {
+  try {
+    const token = GetToken();
+    const response = axios.get(`${API_URL}/watchlist/top`, 
+  {
+    headers: {
+      'authorization': `${token}`,
+      'Accept': 'application/json'
+    },
+  });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+}
+
 export const GetIEXStock = (symbol) => {
   try {
     const token = GetToken();

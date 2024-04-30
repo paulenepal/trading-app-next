@@ -3,7 +3,6 @@
 import TopStocks from "@/components/common/CardList/TopStocks";
 import MainContentLayout from "@/components/providers/MainContentLayout"
 
-
 export default function Dashboard() {
   return (
     <>
