@@ -2,16 +2,11 @@
 
 import React, { useState, useEffect } from 'react';
 
-import HighlightText from '@/components/common/Texts/HighlightText';
-import Image from 'next/image';
-
 import { ADMIN_NAV_ROUTES, USER_NAV_ROUTES } from '@/utils/constants/routes';
 
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
-import Logo from '@/components/common/Logo';
-
-import { GetUserInfo, isConfirmed } from '@/utils/constants/services';
+import { GetUserInfo, updateUserInfo, isConfirmed } from '@/utils/helpers/services';
 import UserButton from '@/components/resources/SideNavigation/UserButton';
 import NavButton from '@/components/resources/SideNavigation/NavButton';
 import Link from 'next/link';
@@ -23,6 +18,17 @@ export default function SideNavigation({ type }: { type: string }) {
   const [activeRoute, setActiveRoute] = useState<string>('');
 
   const pathname = usePathname();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (userInfo.length === 0) {
+        const user = GetUserInfo();
+        setUserInfo(user);
+      }
+      const user = updateUserInfo(userInfo.id);
+      setUserInfo(user);
+    }, 15000);
+  }, []);
 
   useEffect(() => {
     setActiveRoute(pathname);
@@ -58,9 +64,9 @@ const UserNav = ({
           >
             trails.io
           </Link>
-          <div className='tooltip tooltip-right tooltip-base-100' data-tip={isConfirmed(userInfo.role) ? 'Verified Trader' : 'Pending Admin Approval'}>
+          <div className='tooltip tooltip-right tooltip-base-100' data-tip={isConfirmed(userInfo?.role) ? 'Verified Trader' : 'Pending Admin Approval'}>
             <div className="hidden max-md:flex">
-              {isConfirmed(userInfo.role) ? (
+              {isConfirmed(userInfo?.role) ? (
                 <h1 className="text-info-content text-sm px-3 py-3.5 bg-info rounded-badge">
                   <Icon
                     iconName="checkbox-circle-fill"
@@ -77,7 +83,7 @@ const UserNav = ({
               )}
             </div>
             <div className="max-md:hidden">
-              {isConfirmed(userInfo.role) ? (
+              {isConfirmed(userInfo?.role) ? (
                 <h1 className="text-info-content text-sm px-3 py-1 bg-info rounded-badge flex flex-row gap-2 items-center">
                   <Icon
                     iconName="checkbox-circle-fill"

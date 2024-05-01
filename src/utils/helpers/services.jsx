@@ -5,10 +5,37 @@ export const API_URL = 'http://localhost:3001'
 export const GetUserInfo = () => {
   return JSON.parse(sessionStorage.getItem('user'));
 };
+
+export const updateUserInfo = (id) => {
+  const token = GetToken();
+  axios.get(`${API_URL}/user/${id}`, 
+  {
+    headers: {
+      'authorization': `${token}`,
+      'Accept': 'application/json'
+    },
+  }).then((response) => {
+    sessionStorage.setItem('user', JSON.stringify(response.data.data));
+    return response.data.data;
+  }).catch((error) => {
+    console.log(error);
+  });
+}
   
 export const GetToken = () => {
   return sessionStorage.getItem('token');
 };
+
+export const isConfirmed = (role) => {
+  switch (role) {
+    case 'pending_trader':
+      return false;
+    case 'trader':
+      return true;
+    default:
+      return false;
+  }
+}
 
 export const GetIEXStocks = async () => {
   try {
