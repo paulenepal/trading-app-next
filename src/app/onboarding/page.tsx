@@ -136,6 +136,7 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
       const userData = response.data.status.data.user;
       const userHeader = response.headers['authorization'];
       sessionStorage.setItem('user', JSON.stringify(userData));
+      sessionStorage.setItem('role', userData.role);
       sessionStorage.setItem('token', userHeader);
       setError(false);
       setErrorMessage(null);
