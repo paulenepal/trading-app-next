@@ -52,7 +52,7 @@ export const GetIEXStock = (symbol) => {
       'Accept': 'application/json'
     },
   });
-    return response.data;
+    return response;
   } catch (error) {
     return error.error_message;
   }
