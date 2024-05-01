@@ -4,11 +4,11 @@ import React from 'react'
 import {formatTimeAgo, formatTimePosted} from '@/utils/helpers/date-formatter.jsx'
 import Link from 'next/link'
 
-export default function NewsCard({newsDetails}) {
+export default function NewsCard({newsDetails} : {newsDetails: any}) {
   return (
     <Link href={newsDetails.url} target='_blank' className='bg-gray-200 w-full h-fit flex flex-row gap-4 p-4 rounded-lg hover:bg-gray-300 transition-all ease-in-out'>
       <div className='flex items-center'>
-        <img src={newsDetails.image} alt="news" className='image-full size-28 rounded-lg'/>
+        <img src={newsDetails.image} alt="news" className='image-full object-cover size-28 rounded-lg'/>
       </div>
       <div className='flex-1 flex flex-col gap-2'>
         <div>

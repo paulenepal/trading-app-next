@@ -21,12 +21,17 @@ export const updateUserInfo = (id) => {
     console.log(error);
   });
 }
+
+export const GetRole = () => {
+  return sessionStorage.getItem('role');
+}
   
 export const GetToken = () => {
   return sessionStorage.getItem('token');
 };
 
-export const isConfirmed = (role) => {
+export const isConfirmed = () => {
+  const role = GetRole();
   switch (role) {
     case 'pending_trader':
       return false;
@@ -113,6 +118,7 @@ export const HandleSignOut = async () => {
   });
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('role');
     location.replace('/');
   } catch (error) {
     return error.error_message;

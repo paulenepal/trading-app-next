@@ -6,7 +6,7 @@ import { ADMIN_NAV_ROUTES, USER_NAV_ROUTES } from '@/utils/constants/routes';
 
 import { usePathname } from 'next/navigation';
 
-import { GetUserInfo, updateUserInfo, isConfirmed } from '@/utils/helpers/services';
+import { GetUserInfo, updateUserInfo, isConfirmed, GetRole } from '@/utils/helpers/services';
 import UserButton from '@/components/resources/SideNavigation/UserButton';
 import NavButton from '@/components/resources/SideNavigation/NavButton';
 import Link from 'next/link';
@@ -15,6 +15,9 @@ import SignOutButton from '@/components/resources/SideNavigation/SignOutButton';
 
 export default function SideNavigation({ type }: { type: string }) {
   const [userInfo, setUserInfo] = useState(GetUserInfo());
+  const [userRole, setUserRole] = useState(GetRole());
+  
+
   const [activeRoute, setActiveRoute] = useState<string>('');
 
   const pathname = usePathname();
@@ -28,7 +31,7 @@ export default function SideNavigation({ type }: { type: string }) {
       const user = updateUserInfo(userInfo.id);
       setUserInfo(user);
       console.info('Updated User Info')
-    }, 10000);
+    }, 2000);
   }, []);
 
   useEffect(() => {
@@ -38,9 +41,9 @@ export default function SideNavigation({ type }: { type: string }) {
   return (
     <div className="fixed bg-primary left-0 top-0 h-sidenav w-auto px-4 py-6 rounded-xl m-4">
       {type === 'user' ? (
-        <UserNav userInfo={userInfo} activeRoute={pathname} />
+        <UserNav userInfo={userInfo} activeRoute={pathname} userRole={userRole} />
       ) : (
-        <AdminNav userInfo={userInfo} activeRoute={pathname} />
+        <AdminNav userInfo={userInfo} activeRoute={pathname} userRole={userRole} />
       )}
     </div>
   );
@@ -48,9 +51,11 @@ export default function SideNavigation({ type }: { type: string }) {
 
 const UserNav = ({
   userInfo,
+  userRole,
   activeRoute,
 }: {
   userInfo: any;
+  userRole: any;
   activeRoute: any;
 }) => {
   return (
@@ -64,9 +69,9 @@ const UserNav = ({
           >
             trails.io
           </Link>
-          <div className='tooltip tooltip-right tooltip-base-100' data-tip={isConfirmed(userInfo?.role) ? 'Verified Trader' : 'Pending Admin Approval'}>
+          <div className='tooltip tooltip-right tooltip-base-100' data-tip={isConfirmed() ? 'Verified Trader' : 'Pending Admin Approval'}>
             <div className="hidden max-md:flex">
-              {isConfirmed(userInfo?.role) ? (
+              {isConfirmed() ? (
                 <h1 className="text-info-content text-sm px-3 py-3.5 bg-info rounded-badge">
                   <Icon
                     iconName="checkbox-circle-fill"
@@ -83,7 +88,7 @@ const UserNav = ({
               )}
             </div>
             <div className="max-md:hidden">
-              {isConfirmed(userInfo?.role) ? (
+              {isConfirmed() ? (
                 <h1 className="text-info-content text-sm px-3 py-1 bg-info rounded-badge flex flex-row gap-2 items-center">
                   <Icon
                     iconName="checkbox-circle-fill"
@@ -128,9 +133,11 @@ const UserNav = ({
 
 const AdminNav = ({
   userInfo,
+  userRole,
   activeRoute,
 }: {
   userInfo: any;
+  userRole: any;
   activeRoute: any;
 }) => {
   return (
