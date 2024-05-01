@@ -100,7 +100,8 @@ export const AssetColumn = [
 
 export const StockColumn = [
   { key:'symbol', label: 'Stocks' },
-  { key: 'change', label: 'Change 1D' },
+  { key: 'change', label: 'Change' },
+  { key: 'chart',label: '1D' },
   { key: 'latest_price', label: 'Current Price' },
   { label: 'Trade' }
 ]

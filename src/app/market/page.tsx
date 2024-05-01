@@ -4,12 +4,14 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useMemo } from "react";
 
 import MainContentLayout from "@/components/providers/MainContentLayout";
+import TopStocks from "@/components/common/Lists/TopStocks";
 import Table from "@/components/common/Table";
 
 import { StockColumn, StockData } from "@/utils/types/stocktypes";
 import { GetIEXStocks, GetToken } from "@/utils/helpers/services";
 import { MAIN_ROUTES } from "@/utils/constants/routes";
 import BuyButton from "@/components/common/Buttons/Buy";
+import AreaChartNoGrid from "@/components/resources/market/AreaChartNoGrid";
 
 export default function StockMarket() {
   const [stocks, setStocks] = useState<StockData[]>([]);
@@ -35,19 +37,43 @@ export default function StockMarket() {
   }, []);
 
   const memorizedStocks = useMemo(() => stocks, [stocks]);
+  const handleRowClick = (row: StockData) => {
+    router.push(`${MAIN_ROUTES.MARKET}/${row.symbol}`);
+  };
+
+  const formattedStocks = useMemo(
+    () =>
+      stocks.map((stock) => ({
+        ...stock,
+        chart: stock.chart
+          ? stock.chart.map((item) => ({
+              date: item.date,
+              close: item.close,
+              volume: item.volume,
+            }))
+          : [],
+      })),
+    [stocks]
+  );
+  
+  // formattedStocks.forEach((formattedStock, index) => {
+  //   console.log(`formattedStock[${index}]:`, formattedStock);
+  // });
 
   return (
-    <MainContentLayout>
-      <div className="bg-base-100 text-primary-content mt-10">
-        <h1 className="text-3xl">Stock Market</h1>
-      </div>
-      <Table
-        columns={StockColumn}
-        rows={memorizedStocks}
-        button={<BuyButton />}
-        onClick={(row) => {
-          router.push(`${MAIN_ROUTES.MARKET}/${row.symbol}`)
-      }} />
-    </MainContentLayout>
+    <>
+      <MainContentLayout>
+      <h1 className="text-2xl font-bold text-gray-900">Featured Stats</h1>
+        <TopStocks/>
+        <h1 className="text-2xl font-bold text-gray-900">Explore Stocks</h1>
+        <Table
+          columns={StockColumn}
+          // rows={memorizedStocks}
+          rows={formattedStocks}
+          button={<BuyButton />}
+          onClick={handleRowClick}
+        />
+      </MainContentLayout>
+    </>
   )
 }
