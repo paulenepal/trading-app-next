@@ -45,3 +45,11 @@
     @apply max-xl:p-0 max-xl:justify-center flex flex-row gap-4 rounded-full ring-emerald-200 ring-1 ring-opacity-40 hover:ring-0 active:ring-0 active:outline-transparent ;
   }
 }
+
+/* For Balance Forms */
+@layer utilities {
+  .input-nospinner > input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin:0;
+  }
+}

@@ -4,6 +4,7 @@ import { GetToken, GetBalanceTransactions } from '@/utils/helpers/services';
 import { formatToDollar } from '@/utils/helpers/currency-formatter';
 import { formatTimePosted } from '@/utils/helpers/date-formatter';
 import { FormatTransactionType } from '@/utils/helpers/datatype-formatter';
+import Icon from '@/components/common/icon';
 
 export default function TransactionList({
   fetchBalance,
@@ -44,7 +45,8 @@ export default function TransactionList({
             activeTab === 'DEPOSIT' ? 'tab-active' : null
           }`}
         >
-          Deposits {activeTab === 'DEPOSIT' && <span>{transactions?.length}</span>}
+          Deposits{' '}
+          {activeTab === 'DEPOSIT' && <span>{transactions?.length}</span>}
         </a>
         <a
           role="tab"
@@ -55,7 +57,8 @@ export default function TransactionList({
             activeTab === 'WITHDRAW' ? 'tab-active' : null
           }`}
         >
-          Withdrawals {activeTab === 'WITHDRAW' && <span>{transactions?.length}</span>}
+          Withdrawals{' '}
+          {activeTab === 'WITHDRAW' && <span>{transactions?.length}</span>}
         </a>
       </div>
       <div className="overflow-x-auto">
@@ -64,9 +67,7 @@ export default function TransactionList({
             <tr>
               <th></th>
               <td>Amount</td>
-              {activeTab === 'ALL' && (
-                <td>Transaction Type</td>
-              )}
+              {activeTab === 'ALL' && <td>Transaction Type</td>}
               <td>Transaction Date</td>
             </tr>
           </thead>
@@ -92,6 +93,15 @@ export default function TransactionList({
               })}
           </tbody>
         </table>
+        {(transactions && transactions?.length === 0) && (
+          <h1 className="text-center w-full flex flex-row gap-2 justify-center">
+            <Icon
+              iconName="information-line"
+              className="text-primary-content"
+            />
+            No transactions found
+          </h1>
+        )}
       </div>
     </>
   );
