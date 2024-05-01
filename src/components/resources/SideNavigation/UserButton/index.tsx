@@ -1,7 +1,9 @@
 import Icon from "@/components/common/icon";
+import { GetUserInfo } from "@/utils/helpers/services";
 import Link from "next/link";
 
-export default function UserButton({userInfo, activeRoute} : {userInfo: any, activeRoute: any}) {
+export default function UserButton({activeRoute} : {activeRoute: any}) {
+  const userInfo = GetUserInfo()
   return (
     // btn-active
     <Link href='/account' className={`btn btn-primary btn-outline ${(activeRoute === '/account') ? 'btn-active' : null} nav-button justify-start group flex-1`}>

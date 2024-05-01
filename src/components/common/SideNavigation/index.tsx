@@ -20,19 +20,19 @@ export default function SideNavigation({ type }: { type: string }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    setInterval(() => {
       if (userInfo.length === 0) {
         const user = GetUserInfo();
         setUserInfo(user);
       }
       const user = updateUserInfo(userInfo.id);
       setUserInfo(user);
-    }, 15000);
+      console.info('Updated User Info')
+    }, 10000);
   }, []);
 
   useEffect(() => {
     setActiveRoute(pathname);
-    console.log(userInfo)
   }, [pathname]);
 
   return (
@@ -119,7 +119,7 @@ const UserNav = ({
         </div>
       </div>
       <div className="flex max-lg:flex-col flex-row justify-between gap-4">
-        <UserButton userInfo={userInfo} activeRoute={activeRoute} />
+        <UserButton activeRoute={activeRoute} />
         <SignOutButton />
       </div>
     </div>
@@ -182,7 +182,7 @@ const AdminNav = ({
         </div>
 
         <div>
-          <UserButton userInfo={userInfo} activeRoute={activeRoute} />
+          <UserButton activeRoute={activeRoute} />
         </div>
       </div>
     </>
