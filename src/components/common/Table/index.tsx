@@ -1,12 +1,13 @@
 import React from 'react';
 import { TableProps } from '@/utils/types/stocktypes';
 import TablePlaceholder from '@/components/common/Placeholders/TablePlaceholder';
+import AreaChartNoGrid from '@/components/resources/market/AreaChartNoGrid';
 
 export default function Table({ columns, rows, onClick, button }: TableProps) {
   const isLoading = rows.length === 0;
   const virtualizedRows = isLoading ? Array.from({ length: 10 }) : rows;
   return (
-    <div className="overflow-x-auto w-full">
+    <div className="flex flex-1 overflow-x-auto w-full">
       <table className="table">
         {/* head */}
         <thead>
@@ -43,6 +44,11 @@ export default function Table({ columns, rows, onClick, button }: TableProps) {
                   {row.change_percent}
                 </span>
               </td>
+
+              <td>
+                <AreaChartNoGrid chartData={row.chart} height={60} width={400} />
+              </td>
+
               <td>{`$ ${row.latest_price.toFixed(2)}`}</td>
               <td>
                 {button}
