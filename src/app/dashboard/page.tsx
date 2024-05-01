@@ -12,9 +12,9 @@ export default function Dashboard() {
         {/* promo card */}
         <UserCard/>
         {/* Featured Market Stats */}
-        <h1 className="text-2xl font-bold dark:text-gray-900 text-gray-100">Featured Stats</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Featured Stats</h1>
         <TopStocks/>
-        <h1 className="text-2xl font-bold dark:text-gray-900 text-gray-100">Recent News</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Recent News</h1>
         <NewsList/>
       </MainContentLayout>
     </>
