@@ -20,14 +20,14 @@ export default function StockHeaderCard({
           <div>
             <div className="text-xl font-medium">{symbol} <span className="text-sm"> > {companyName} </span></div>
             <div>
-            {latestPrice && (
-              <div className="text-2xl font-bold mr-2">${latestPrice.toFixed(2)}</div>
-            )}
-            <div className={change < 0 ? "text-error" : "text-success"}>
-              <span className="font-bold">{change ? change.toFixed(2) : '0'}</span>
-              <span className="text-xs ml-1">{changePercent || '0'}</span>
+              {latestPrice && (
+                <div className="text-2xl font-bold mr-2">${latestPrice.toFixed(2)}</div>
+              )}
+              <div className={change < 0 ? "text-error" : "text-success"}>
+                <span className="font-bold">{change ? change.toFixed(2) : '0'}</span>
+                <span className="text-xs ml-1">{changePercent || '0'}</span>
+              </div>
             </div>
-          </div>
           </div>
         </div>
         <div className="flex items-center">
