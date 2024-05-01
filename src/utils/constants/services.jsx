@@ -8,3 +8,22 @@ export const SIGN_UP_REQUEST_HEADERS = {
   'Accept-Encoding': 'gzip, deflate, br',
   'Connection': 'keep-alive'
 }
+
+export const GetUserInfo = () => {
+  return JSON.parse(sessionStorage.getItem('user'));
+}
+
+export const GetToken = () => {
+  return JSON.parse(sessionStorage.getItem('token'));
+}
+
+export const isConfirmed = (role) => {
+  switch (role) {
+    case 'pending_trader':
+      return false;
+    case 'trader':
+      return true;
+    default:
+      return false;
+  }
+}

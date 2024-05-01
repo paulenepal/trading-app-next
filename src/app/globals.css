@@ -26,6 +26,9 @@
   .text-transition {
     @apply transition-all ease-in-out hover:opacity-100;
   }
+  .h-sidenav {
+    height: calc(100vh - 2rem);
+  }
 }
 
 /* For Onboarding Forms */
@@ -34,3 +37,11 @@
     @apply input input-ghost input-secondary active:outline-none bg-transparent flex items-center gap-2;
   }
 } 
+
+/* For Nav Buttons */
+
+@layer utilities {
+  .nav-button {
+    @apply max-xl:p-0 max-xl:justify-center flex flex-row gap-4 rounded-full ring-emerald-200 ring-1 ring-opacity-40 hover:ring-0 active:ring-0 active:outline-transparent ;
+  }
+}
