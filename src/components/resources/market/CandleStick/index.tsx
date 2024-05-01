@@ -71,13 +71,13 @@ import {
 // ]
 
 
-const Stonk = ({ chartData }) => {
+const Stonk = ({ chartData, height, width }) => {
   const ScaleProvider =
     discontinuousTimeScaleProviderBuilder().inputDateAccessor(
       (d) => new Date(d.date)
     );
-  const height = 700;
-  const width = 900;
+  // const height = 700;
+  // const width = 900;
   const margin = { left: 0, right: 48, top: 0, bottom: 24 };
 
   const ema12 = ema()
