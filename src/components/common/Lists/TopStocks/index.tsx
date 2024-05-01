@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 
 import StockCard from '../../Cards/StockCard'
 
-import { getTopStocks, GetToken } from "@/utils/helpers/services";
+import { GetTopStocks, GetToken } from "@/utils/helpers/services";
 import StockCardPlaceholder from "@/components/common/Placeholders/StockCardPlaceholder";
 
 export default function TopStocks() {
@@ -16,7 +16,7 @@ export default function TopStocks() {
         const token = GetToken();
 
         if (token) {
-          const response = await getTopStocks(token);
+          const response = await GetTopStocks(token);
           setStocks(response.data);
         } else {
           console.error("User not logged in");
@@ -27,8 +27,6 @@ export default function TopStocks() {
     };
     fetchStocks();
   }, []);
-
-  console.log(stocks);
 
   return (
     <>

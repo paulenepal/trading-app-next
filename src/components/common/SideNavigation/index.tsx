@@ -2,20 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 
-import HighlightText from '@/components/common/Texts/HighlightText';
-import Image from 'next/image';
-
 import { ADMIN_NAV_ROUTES, USER_NAV_ROUTES } from '@/utils/constants/routes';
 
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
-import Logo from '@/components/common/Logo';
-
-import { GetUserInfo, isConfirmed } from '@/utils/constants/services';
+import { GetUserInfo, updateUserInfo, isConfirmed } from '@/utils/helpers/services';
 import UserButton from '@/components/resources/SideNavigation/UserButton';
 import NavButton from '@/components/resources/SideNavigation/NavButton';
 import Link from 'next/link';
-import Icon from '../icon';
+import Icon from '@/components/common/icon';
+import SignOutButton from '@/components/resources/SideNavigation/SignOutButton';
 
 export default function SideNavigation({ type }: { type: string }) {
   const [userInfo, setUserInfo] = useState(GetUserInfo());
@@ -24,8 +20,19 @@ export default function SideNavigation({ type }: { type: string }) {
   const pathname = usePathname();
 
   useEffect(() => {
+    setInterval(() => {
+      if (userInfo.length === 0) {
+        const user = GetUserInfo();
+        setUserInfo(user);
+      }
+      const user = updateUserInfo(userInfo.id);
+      setUserInfo(user);
+      console.info('Updated User Info')
+    }, 10000);
+  }, []);
+
+  useEffect(() => {
     setActiveRoute(pathname);
-    console.log(userInfo)
   }, [pathname]);
 
   return (
@@ -57,41 +64,43 @@ const UserNav = ({
           >
             trails.io
           </Link>
-          <div className="hidden max-md:flex">
-            {isConfirmed(userInfo.role) ? (
-              <h1 className="text-info-content text-sm px-3 py-3.5 bg-info rounded-badge">
-                <Icon
-                  iconName="checkbox-circle-fill"
-                  className="text-info-content text-lg"
-                />
-              </h1>
-            ) : (
-              <h1 className="text-warning-content text-sm px-3 py-1.5 bg-warning rounded-badge">
-                <Icon
-                  iconName="error-warning-fill"
-                  className="text-warning-content text-lg"
-                />
-              </h1>
-            )}
-          </div>
-          <div className="max-md:hidden">
-            {isConfirmed(userInfo.role) ? (
-              <h1 className="text-info-content text-sm px-3 py-1 bg-info rounded-badge flex flex-row gap-2 items-center">
-                <Icon
-                  iconName="checkbox-circle-fill"
-                  className="text-info-content text-lg"
-                />
-                Approved
-              </h1>
-            ) : (
-              <h1 className="text-warning-content text-sm px-3 py-1 bg-warning rounded-badge flex flex-row gap-2 items-center">
-                <Icon
-                  iconName="error-warning-fill"
-                  className="text-warning-content text-lg"
-                />
-                Pending
-              </h1>
-            )}
+          <div className='tooltip tooltip-right tooltip-base-100' data-tip={isConfirmed(userInfo?.role) ? 'Verified Trader' : 'Pending Admin Approval'}>
+            <div className="hidden max-md:flex">
+              {isConfirmed(userInfo?.role) ? (
+                <h1 className="text-info-content text-sm px-3 py-3.5 bg-info rounded-badge">
+                  <Icon
+                    iconName="checkbox-circle-fill"
+                    className="text-info-content text-lg"
+                  />
+                </h1>
+              ) : (
+                <h1 className="text-warning-content text-sm px-3 py-1.5 bg-warning rounded-badge">
+                  <Icon
+                    iconName="error-warning-fill"
+                    className="text-warning-content text-lg"
+                  />
+                </h1>
+              )}
+            </div>
+            <div className="max-md:hidden">
+              {isConfirmed(userInfo?.role) ? (
+                <h1 className="text-info-content text-sm px-3 py-1 bg-info rounded-badge flex flex-row gap-2 items-center">
+                  <Icon
+                    iconName="checkbox-circle-fill"
+                    className="text-info-content text-lg"
+                  />
+                  Approved
+                </h1>
+              ) : (
+                <h1 className="text-warning-content text-sm px-3 py-1 bg-warning rounded-badge flex flex-row gap-2 items-center">
+                  <Icon
+                    iconName="error-warning-fill"
+                    className="text-warning-content text-lg"
+                  />
+                  Pending
+                </h1>
+              )}
+            </div>
           </div>
         </div>
         <div className="divider my-0 -mt-1" />
@@ -109,8 +118,9 @@ const UserNav = ({
           })}
         </div>
       </div>
-      <div>
-        <UserButton userInfo={userInfo} activeRoute={activeRoute} />
+      <div className="flex max-lg:flex-col flex-row justify-between gap-4">
+        <UserButton activeRoute={activeRoute} />
+        <SignOutButton />
       </div>
     </div>
   );
@@ -172,7 +182,7 @@ const AdminNav = ({
         </div>
 
         <div>
-          <UserButton userInfo={userInfo} activeRoute={activeRoute} />
+          <UserButton activeRoute={activeRoute} />
         </div>
       </div>
     </>
