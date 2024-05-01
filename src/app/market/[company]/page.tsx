@@ -10,6 +10,7 @@ import AreaChart from "@/components/resources/market/AreaChart";
 import AreaChartNoGrid from "@/components/resources/market/AreaChartNoGrid";
 import StockHeaderCard from "@/components/common/Cards/StockHeaderCard";
 import BuyButton from "@/components/common/Buttons/Buy";
+import ChartCard from "@/components/common/Cards/ChartCard";
 
 export default function Page({ params }: { params: {company: string}}) {
   const [stock, setStock] = useState([]);
@@ -61,23 +62,19 @@ export default function Page({ params }: { params: {company: string}}) {
             button={<BuyButton/>}
           />
         )}
+
         <div>
           <p>News Headline: {stock && stock.news && stock.news.headline}</p>
-          
           <Stonk
             chartData={formattedChartData}
-          />
+            height={500}
+            width={700}/>
+
           <br />
 
           <AreaChart
             chartData={formattedChartData}
             />
-
-            <br />
-
-          <AreaChartNoGrid
-            chartData={formattedChartData}
-          />
 
         </div>
       </MainContentLayout>
