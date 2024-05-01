@@ -1,14 +1,14 @@
 import React from "react";
 import { timeFormat } from "d3-time-format";
-import { discontinuousTimeScaleProviderBuilder, Chart, ChartCanvas, AreaSeries, CrossHairCursor, MouseCoordinateX, MouseCoordinateY, ZoomButtons } from "react-financial-charts";
+import { discontinuousTimeScaleProviderBuilder, Chart, ChartCanvas, AreaSeries, MouseCoordinateX, MouseCoordinateY } from "react-financial-charts";
 
-const AreaChartNoGrid = ({ chartData }) => {
+const AreaChartNoGrid = ({ chartData, height, width }) => {
   const ScaleProvider =
     discontinuousTimeScaleProviderBuilder().inputDateAccessor(
       (d) => new Date(d.date)
     );
-  const height = 700;
-  const width = 900;
+  // const height = 700;
+  // const width = 900;
   const margin = { left: 0, right: 48, top: 0, bottom: 24 };
 
   const { data, xScale, xAccessor, displayXAccessor } = ScaleProvider(
@@ -48,8 +48,6 @@ const AreaChartNoGrid = ({ chartData }) => {
           displayFormat={timeDisplayFormat}
         />
       </Chart>
-      <CrossHairCursor />
-      <ZoomButtons />
     </ChartCanvas>
   );
 };
