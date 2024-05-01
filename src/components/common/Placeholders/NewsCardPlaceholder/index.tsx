@@ -6,8 +6,8 @@ export default function NewsCardPlaceholder() {
       <div className='flex items-center'>
         <div className='skeleton w-28 h-28 rounded-lg'/>
       </div>
-      <div className='flex-1 flex flex-col gap-2'>
-        <div>
+      <div className='flex-1 flex flex-col gap-2 justify-between'>
+        <div className='flex flex-col gap-2'>
           <div className='skeleton w-44 h-4'/>
           <div className='skeleton w-24 h-4'/>
         </div>

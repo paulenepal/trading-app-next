@@ -27,6 +27,12 @@ export default function NewsList() {
     fetchNews();
   }, []);
 
+  const randomizeNews = () => {
+    news.sort(() => Math.random() - 0.5);
+  }
+
+  randomizeNews();
+
   return (
     <div className='flex flex-col flex-1 overflow-y-scroll rounded-lg gap-2'>
       {
