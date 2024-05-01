@@ -19,13 +19,8 @@ export default function Page({ params }: { params: {company: string}}) {
         const token = GetToken();
       
         if (token) {
-<<<<<<< HEAD
-          const response = await GetIEXStock(params.company);
-          setStock(response.data);
-=======
           const stock = await GetIEXStock(params.company);
           setStock(stock.data);
->>>>>>> ac50ed3ca52229625b436b6d11627c22bac6981f
         } else {
           console.error("User not logged in");
         }
