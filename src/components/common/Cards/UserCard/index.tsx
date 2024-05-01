@@ -24,8 +24,8 @@ export default function UserCard() {
           <button className="btn btn-sm bg-opacity-55 text-primary-content hover:text-error-content btn-error">Withdraw</button>
         </div>
       </div>
-      <div className='flex flex-col max-md:flex-auto max-md:justify-start max-md:gap-4 justify-between'>
-        <div role="tablist" className="h-fit w-fit tabs bg-transparent tabs-boxed gap-2">
+      <div className='flex flex-col w-2/3 max-md:flex-auto max-md:justify-start max-md:gap-4 justify-between'>
+        <div role="tablist" className="h-fit w-fit tabs tabs-bordered bg-transparent gap-2">
           <a role="tab" onClick={() => {handleTabChange('BALANCE')}} className={`tab hover:bg-secondary transition-all ease-in-out ${activeTab === 'BALANCE' ? 'tab-active' : null}`}>Balance</a>
           <a role="tab" onClick={() => {handleTabChange('STOCKS')}} className={`tab hover:bg-secondary transition-all ease-in-out ${activeTab === 'STOCKS' ? 'tab-active' : null}`}>Investments</a>
         </div>
