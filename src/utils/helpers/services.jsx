@@ -61,7 +61,7 @@ export const GetIEXStock = (symbol) => {
 export const GetGeneralNews = async () => {
   try {
     const token = GetToken();
-    const response = axios.get(`${API_URL}/watchlist/top`, 
+    const response = axios.get(`${API_URL}/watchlist/news`, 
   {
     headers: {
       'authorization': `${token}`,

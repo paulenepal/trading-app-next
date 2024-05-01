@@ -28,8 +28,6 @@ export default function TopStocks() {
     fetchStocks();
   }, []);
 
-  console.log(stocks);
-
   return (
     <>
       

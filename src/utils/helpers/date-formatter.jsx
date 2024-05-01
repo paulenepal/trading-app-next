@@ -12,7 +12,7 @@ const DIVISIONS = [
   { amount: Number.POSITIVE_INFINITY, name: "years" },
 ]
 
-export default function formatTimeAgo(date) {
+export function formatTimeAgo(date) {
   date = new Date(date)
   let duration = (date - new Date()) / 1000
 
@@ -23,4 +23,12 @@ export default function formatTimeAgo(date) {
     }
     duration /= division.amount
   }
+}
+
+// format time Posted Yesterday - July 20, 2021
+
+export function formatTimePosted(date) {
+  date = new Date(date)
+  const options = { year: 'numeric', month: 'long', day: 'numeric' }
+  return date.toLocaleDateString(undefined, options)
 }
