@@ -8,6 +8,8 @@ import { capitalize } from "@/utils/helpers/name-formatter";
 import Stonk from "@/components/resources/market/CandleStick";
 import AreaChart from "@/components/resources/market/AreaChart";
 import AreaChartNoGrid from "@/components/resources/market/AreaChartNoGrid";
+import StockHeaderCard from "@/components/common/Cards/StockHeaderCard";
+import BuyButton from "@/components/common/Buttons/Buy";
 
 export default function Page({ params }: { params: {company: string}}) {
   const [stock, setStock] = useState([]);
@@ -41,37 +43,44 @@ export default function Page({ params }: { params: {company: string}}) {
     close: item.close,
     volume: item.volume
   })) : [];
-  
 
-  console.log(formattedChartData);
+  // console.log(formattedChartData);
+
 
   return (
     <>
-    <MainContentLayout>
-    <div>
-      <h1>This Page is {stockName}</h1>
-  
-      {stockName} latest price: {stock.latest_price}
-      <p>News Headline: {stock && stock.news && stock.news.headline}</p>
-      <p>{stock && stock.historical_prices && stock.historical_prices[0].close }</p>
-      
-      <Stonk
-        chartData={formattedChartData}
-      />
-      <br />
+      <MainContentLayout>
+        {stock && (
+          <StockHeaderCard
+            logo={stock.logo}
+            symbol={stockName}
+            latestPrice={stock.latest_price}
+            companyName={stock.company_name}
+            change={stock.change}
+            changePercent={stock.change_percent}
+            button={<BuyButton/>}
+          />
+        )}
+        <div>
+          <p>News Headline: {stock && stock.news && stock.news.headline}</p>
+          
+          <Stonk
+            chartData={formattedChartData}
+          />
+          <br />
 
-      <AreaChart
-        chartData={formattedChartData}
-        />
+          <AreaChart
+            chartData={formattedChartData}
+            />
 
-        <br />
+            <br />
 
-      <AreaChartNoGrid
-        chartData={formattedChartData}
-      />
+          <AreaChartNoGrid
+            chartData={formattedChartData}
+          />
 
-    </div>
-    </MainContentLayout>
+        </div>
+      </MainContentLayout>
     </>
   );
 };
