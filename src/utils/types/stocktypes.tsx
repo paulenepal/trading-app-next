@@ -110,4 +110,5 @@ export interface TableProps {
   columns: { key: string; label: string } [];
   rows: any[];
   onClick: (row: StockData) => void;
+  button?: JSX.Element;
 }

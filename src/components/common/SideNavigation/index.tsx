@@ -31,7 +31,7 @@ export default function SideNavigation({ type }: { type: string }) {
       const user = updateUserInfo(userInfo.id);
       setUserInfo(user);
       console.info('Updated User Info')
-    }, 2000);
+    }, 10000);
   }, []);
 
   useEffect(() => {
