@@ -32,7 +32,7 @@ export default function SideNavigation({ type }: { type: string }) {
 
   useEffect(() => {
     setInterval(() => {
-      if (userInfo.length === 0) {
+      if (userInfo?.length === 0) {
         const user = GetUserInfo();
         setUserInfo(user);
       }
