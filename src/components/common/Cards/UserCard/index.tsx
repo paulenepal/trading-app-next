@@ -15,14 +15,14 @@ export default function UserCard() {
     <div className="w-full h-44 px-4 bg-gradient-to-tl from-secondary to-white rounded-xl p-4 flex flex-row max-md:flex-col gap-4 justify-between">
       <div className="h-full flex flex-col justify-between items-start flex-1 max-xl:hidden">
         <div>
-          <h1 className='text-2xl font-bold text-gray-900'>Welcome, {userData.first_name} {userData.last_name}</h1>
-          <p className='text-xs'>@{userData.username}</p>
-          <p className='text-xs'>{userData.email}</p>
+          <h1 className='text-2xl font-bold text-gray-900'>Welcome, {userData?.first_name} {userData?.last_name}</h1>
+          <p className='text-xs'>@{userData?.username}</p>
+          <p className='text-xs'>{userData?.email}</p>
         </div>
-        <div className="flex justify-center items-start gap-4">
+        {/* <div className="flex justify-center items-start gap-4">
           <button className="btn btn-sm bg-opacity-55 btn-primary">Deposit</button>
           <button className="btn btn-sm bg-opacity-55 text-primary-content hover:text-error-content btn-error">Withdraw</button>
-        </div>
+        </div> */}
       </div>
       <div className='flex flex-col w-2/3 max-md:flex-auto max-md:justify-start max-md:gap-4 justify-between'>
         <div role="tablist" className="h-fit w-fit tabs tabs-bordered bg-transparent gap-2">
@@ -31,7 +31,7 @@ export default function UserCard() {
         </div>
         <div>
           {
-            activeTab === 'BALANCE' ? <BalanceTab balance={userData.balance}/> : <StocksTab balance={userData.balance}/>
+            activeTab === 'BALANCE' ? <BalanceTab balance={userData?.balance}/> : <StocksTab balance={userData?.balance}/>
           }
         </div>
       </div>

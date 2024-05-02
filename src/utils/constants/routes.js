@@ -1,6 +1,6 @@
 // access it as MAIN_ROUTES.HOME
 
-import Onboarding from "@/app/onboarding/page";
+import { isConfirmed } from "../helpers/services";
 
 export const MAIN_ROUTES = {
   HOME: '/',
@@ -21,7 +21,50 @@ export const USER_ROUTES = {
   MARKET: '/market',
 };
 
-export const USER_NAV_ROUTES = [
+// export const USER_NAV_ROUTES = [
+//   {
+//     text: 'Dashboard',
+//     iconName: 'home-fill',
+//     routeTo: USER_ROUTES.DASHBOARD
+//   },
+//   {
+//     text: 'Portfolio',
+//     iconName: 'folder-fill',
+//     routeTo: USER_ROUTES.PORTFOLIO
+//   },
+//   {
+//     text: 'Transactions',
+//     iconName: 'arrow-left-right-line',
+//     routeTo: USER_ROUTES.TRANSACTIONS
+//   },
+//   {
+//     text: 'Wallet',
+//     iconName: 'wallet-fill',
+//     routeTo: USER_ROUTES.WALLET
+//   },
+//   {
+//     text: 'Market',
+//     iconName: 'funds-box-fill',
+//     routeTo: USER_ROUTES.MARKET
+//   }
+// ]
+
+
+
+export const PENDING_ROUTES = [
+  {
+    text: 'Dashboard',
+    iconName: 'home-fill',
+    routeTo: USER_ROUTES.DASHBOARD
+  },
+  {
+    text: 'Market',
+    iconName: 'funds-box-fill',
+    routeTo: USER_ROUTES.MARKET
+  }
+]
+
+export const APPROVED_ROUTES = [
   {
     text: 'Dashboard',
     iconName: 'home-fill',
@@ -47,7 +90,7 @@ export const USER_NAV_ROUTES = [
     iconName: 'funds-box-fill',
     routeTo: USER_ROUTES.MARKET
   }
-]
+] 
 
 export const ADMIN_ROUTES = {
   DASHBOARD: '/admin',

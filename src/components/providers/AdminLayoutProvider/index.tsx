@@ -8,17 +8,16 @@ import { useRouter } from 'next/navigation';
 import { isAdmin } from "@/utils/helpers/services";
 import { isSignedIn } from "@/utils/helpers/authHelper";
 
-export default function UserLayoutProvider({ children } : { children: ReactNode}) {
+export default function AdminLayoutProvider({ children } : { children: ReactNode}) {
   const router = useRouter();
 
   useEffect(() => {
-    // isSignedIn() ? null : isAdmin() ? router.push('/admin') : router.push('/onboarding')
-    isAdmin() ? router.push('/admin') : isSignedIn() ? null : router.push('/onboarding')
+    isSignedIn() ? isAdmin() ? null : router.push('/dashboard') : router.push('/onboarding')
   }, []);
 
   return (
     <>
-      <SideNavigation type={'user'}/>
+      <SideNavigation type={'admin'}/>
         {children}
     </>
   )

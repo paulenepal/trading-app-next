@@ -8,7 +8,7 @@ export default function Table({ columns, rows, onClick, button }: TableProps) {
   const virtualizedRows = isLoading ? Array.from({ length: 10 }) : rows;
   return (
     <div className="flex flex-1 overflow-x-auto w-full">
-      <table className="table">
+      <table className="table table-pin-rows">
         {/* head */}
         <thead>
           <tr>

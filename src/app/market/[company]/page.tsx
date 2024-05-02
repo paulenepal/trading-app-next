@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 
 import MainContentLayout from "@/components/providers/MainContentLayout"
+import UserLayoutProvider from "@/components/providers/UserLayoutProvider"
 import { GetIEXStock, GetToken } from "@/utils/helpers/services";
 import { capitalize } from "@/utils/helpers/name-formatter";
 import Stonk from "@/components/resources/market/CandleStick";
@@ -49,7 +50,7 @@ export default function Page({ params }: { params: {company: string}}) {
 
 
   return (
-    <>
+    <UserLayoutProvider>
       <MainContentLayout>
         {stock && (
           <StockHeaderCard
@@ -78,7 +79,7 @@ export default function Page({ params }: { params: {company: string}}) {
 
         </div>
       </MainContentLayout>
-    </>
+    </UserLayoutProvider>
   );
 };
 

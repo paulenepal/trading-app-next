@@ -42,6 +42,16 @@ export const isConfirmed = () => {
   }
 }
 
+export const isAdmin = () => {
+  const role = GetRole();
+  switch (role) {
+    case 'admin':
+      return true;
+    default:
+      return false;
+  }
+}
+
 export const GetIEXStocks = async () => {
   try {
     const token = GetToken();
@@ -116,10 +126,10 @@ export const HandleSignOut = async () => {
       'Accept': 'application/json'
     },
   });
+    location.replace('/');
     sessionStorage.removeItem('user');
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('role');
-    location.replace('/');
   } catch (error) {
     return error.error_message;
   }

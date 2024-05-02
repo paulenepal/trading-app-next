@@ -12,6 +12,7 @@ import {
   WithdrawFunds,
 } from '@/utils/helpers/services';
 import MainContentLayout from '@/components/providers/MainContentLayout';
+import UserLayoutProvider from '@/components/providers/UserLayoutProvider';
 import DepositModal from '@/components/common/Modals/DepositModal';
 import WithdrawModal from '@/components/common/Modals/WithdrawModal';
 
@@ -117,22 +118,24 @@ export default function Wallet() {
   };
 
   return (
-    <MainContentLayout>
-      <BalanceCard
-        onPressDeposit={() => openModal('deposit_modal')}
-        onPressWithdraw={() => openModal('withdraw_modal')}
-        balance={balance}
-      />
-      <TransactionList {...transactionProps} transactions={transactions} />
-      <DepositModal
-        onPressSubmit={() => closeModal('deposit_modal')}
-        handleDeposit={onPressDeposit}
-      />
-      <WithdrawModal 
-        balance={balance}
-        onPressSubmit={() => closeModal('withdraw_modal')}
-        handleWithdraw={onPressWithdraw}
-      />
-    </MainContentLayout>
+    <UserLayoutProvider>
+      <MainContentLayout>
+        <BalanceCard
+          onPressDeposit={() => openModal('deposit_modal')}
+          onPressWithdraw={() => openModal('withdraw_modal')}
+          balance={balance}
+        />
+        <TransactionList {...transactionProps} transactions={transactions} />
+        <DepositModal
+          onPressSubmit={() => closeModal('deposit_modal')}
+          handleDeposit={onPressDeposit}
+        />
+        <WithdrawModal 
+          balance={balance}
+          onPressSubmit={() => closeModal('withdraw_modal')}
+          handleWithdraw={onPressWithdraw}
+        />
+      </MainContentLayout>
+    </UserLayoutProvider>
   );
 }

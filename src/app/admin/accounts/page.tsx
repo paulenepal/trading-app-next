@@ -1,13 +1,14 @@
 'use client'
 
-import Icon from "@/components/common/icon"
+import MainContentLayout from "@/components/providers/MainContentLayout"
+import SharedLayoutProvider from "@/components/providers/SharedLayoutProvider"
 
 export default function Accounts() {
   return (
-    <div className="bg-base-100 text-primary-content">
-      <h1 className="text-4xl ">Account Management</h1>
-      <p className="text-lg">localhost:3000/accounts</p>
-      <Icon iconName="user-fill" className="text-purple-400 text-4xl" ></Icon>
-    </div>
+    <SharedLayoutProvider>
+      <MainContentLayout>
+        Admin Accounts
+      </MainContentLayout>
+    </SharedLayoutProvider>
   )
 }

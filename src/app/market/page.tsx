@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useMemo } from "react";
 
 import MainContentLayout from "@/components/providers/MainContentLayout";
+import SharedLayoutProvider from "@/components/providers/SharedLayoutProvider";
 import TopStocks from "@/components/common/Lists/TopStocks";
 import Table from "@/components/common/Table";
 
@@ -11,7 +12,6 @@ import { StockColumn, StockData } from "@/utils/types/stocktypes";
 import { GetIEXStocks, GetToken } from "@/utils/helpers/services";
 import { MAIN_ROUTES } from "@/utils/constants/routes";
 import BuyButton from "@/components/common/Buttons/Buy";
-import AreaChartNoGrid from "@/components/resources/market/AreaChartNoGrid";
 
 export default function StockMarket() {
   const [stocks, setStocks] = useState<StockData[]>([]);
@@ -60,7 +60,7 @@ export default function StockMarket() {
   // });
 
   return (
-    <>
+    <SharedLayoutProvider>
       <MainContentLayout>
       <h1 className="text-2xl font-bold text-gray-900">Featured Stats</h1>
         <TopStocks/>
@@ -73,6 +73,6 @@ export default function StockMarket() {
           onClick={handleRowClick}
         />
       </MainContentLayout>
-    </>
+    </SharedLayoutProvider>
   )
 }
