@@ -111,7 +111,6 @@ export default function Wallet() {
   }, []);
 
   const transactionProps = {
-    fetchBalance,
     fetchTransactions,
     activeTab,
     handleTabChange,

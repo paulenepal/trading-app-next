@@ -27,7 +27,6 @@ export default function DepositModal({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<DEPOSIT_INPUT> = (data) => {
-    console.log(data);
     reset();
     handleDeposit(data);
     onPressSubmit();

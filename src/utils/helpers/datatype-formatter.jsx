@@ -4,6 +4,10 @@ export const FormatTransactionType = (type) => {
       return 'Deposit';
     case 'deduct_balance':
       return 'Withdraw';
+    case 'share_buy':
+      return 'Bought Shares';
+    case 'share_sell':
+      return 'Sold Shares';
     default:
       return 'Unknown';
   }

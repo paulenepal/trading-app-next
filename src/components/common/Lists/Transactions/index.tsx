@@ -7,13 +7,11 @@ import { FormatTransactionType } from '@/utils/helpers/datatype-formatter';
 import Icon from '@/components/common/icon';
 
 export default function TransactionList({
-  fetchBalance,
   fetchTransactions,
   transactions,
   activeTab,
   handleTabChange,
 }: {
-  fetchBalance: Function;
   fetchTransactions: Function;
   transactions: any;
   activeTab: string;
@@ -62,7 +60,7 @@ export default function TransactionList({
         </a>
       </div>
       <div className="overflow-x-auto">
-        <table className="table table-xs table-pin-rows table-pin-cols">
+        <table className="table table-md table-pin-rows table-pin-cols">
           <thead>
             <tr>
               <th></th>

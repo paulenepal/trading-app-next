@@ -23,7 +23,6 @@ export default function StockMarket() {
         if (token) {
           const response = await GetIEXStocks(token);
           setStocks(response.data);
-          console.log(response.data);
         } else {
           console.error("User not logged in");
         }

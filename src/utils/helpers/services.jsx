@@ -18,7 +18,7 @@ export const updateUserInfo = (id) => {
     sessionStorage.setItem('user', JSON.stringify(response.data.data));
     return response.data.data;
   }).catch((error) => {
-    console.log(error);
+    console.error(error);
   });
 }
 
@@ -193,6 +193,23 @@ export const GetBalanceTransactions = async (type) => {
       'Accept': 'application/json'
     },
   });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+}
+
+export const GetStockTransactions = async () => {
+  try {
+    const token = GetToken();
+    const response = axios.get(`${API_URL}/transactions`, 
+  {
+    headers: {
+      'authorization': `${token}`,
+      'Accept': 'application/json'
+    },
+  });
+    console.log((await response))
     return response;
   } catch (error) {
     return error.error_message;
