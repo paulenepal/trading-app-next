@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { ADMIN_NAV_ROUTES, USER_NAV_ROUTES } from '@/utils/constants/routes';
+import { ADMIN_NAV_ROUTES, APPROVED_ROUTES, PENDING_ROUTES } from '@/utils/constants/routes';
 
 import { usePathname } from 'next/navigation';
 
@@ -16,22 +16,30 @@ import SignOutButton from '@/components/resources/SideNavigation/SignOutButton';
 export default function SideNavigation({ type }: { type: string }) {
   const [userInfo, setUserInfo] = useState(GetUserInfo());
   const [userRole, setUserRole] = useState(GetRole());
+  const [userRoutes, setUserRoutes] = useState([]);
   
-
   const [activeRoute, setActiveRoute] = useState<string>('');
 
   const pathname = usePathname();
 
+  const handleUserRoutes = () => {
+    isConfirmed() ?  setUserRoutes(APPROVED_ROUTES) : setUserRoutes(PENDING_ROUTES);
+  }
+
+  useEffect(() => {
+    handleUserRoutes()
+  }, []);
+
   useEffect(() => {
     setInterval(() => {
-      if (userInfo.length === 0) {
+      if (userInfo?.length === 0) {
         const user = GetUserInfo();
         setUserInfo(user);
       }
       const user = updateUserInfo(userInfo.id);
       setUserInfo(user);
       console.info('Updated User Info')
-    }, 2000);
+    }, 10000);
   }, []);
 
   useEffect(() => {
@@ -41,7 +49,7 @@ export default function SideNavigation({ type }: { type: string }) {
   return (
     <div className="fixed bg-primary left-0 top-0 h-sidenav w-auto px-4 py-6 rounded-xl m-4">
       {type === 'user' ? (
-        <UserNav userInfo={userInfo} activeRoute={pathname} userRole={userRole} />
+        <TraderNav userRoutes={userRoutes} userInfo={userInfo} activeRoute={pathname} userRole={userRole} />
       ) : (
         <AdminNav userInfo={userInfo} activeRoute={pathname} userRole={userRole} />
       )}
@@ -49,11 +57,13 @@ export default function SideNavigation({ type }: { type: string }) {
   );
 }
 
-const UserNav = ({
+const TraderNav = ({
+  userRoutes,
   userInfo,
   userRole,
   activeRoute,
 }: {
+  userRoutes: any;
   userInfo: any;
   userRole: any;
   activeRoute: any;
@@ -65,7 +75,7 @@ const UserNav = ({
         <div className="inline-flex w-auto flex-row gap-8 justify-between items-center my-0 mx-4 max-md:justify-center">
           <Link
             href="/"
-            className="font-bold text-2xl leading-none text-info hover:text-neutral text-transition fade-in max-md:hidden"
+            className="font-bold text-2xl leading-none text-info hover:text-neutral text-transition max-md:hidden"
           >
             trails.io
           </Link>
@@ -110,7 +120,7 @@ const UserNav = ({
         </div>
         <div className="divider my-0 -mt-1" />
         <div className="flex flex-col gap-2">
-          {USER_NAV_ROUTES.map((nav: any, index: number) => {
+          {userRoutes.map((nav: any, index: number) => {
             return (
               <NavButton
                 key={index}
@@ -145,10 +155,10 @@ const AdminNav = ({
       <div className="w-full h-full flex flex-col justify-between items-center *:w-full">
         {/* <Image alt='' src='/logo.svg' width={100} height={100} className='text' /> */}
         <div className="flex flex-col gap-4 h-full">
-          <div className="inline-flex w-auto flex-row justify-between items-center my-0 mx-4 ">
+          <div className="inline-flex w-auto flex-row gap-8 justify-between items-center my-0 mx-4 max-md:justify-center">
             <Link
               href="/"
-              className="font-bold text-2xl leading-none text-info hover:text-neutral text-transition fade-in max-md:hidden"
+              className="font-bold text-2xl leading-none text-info hover:text-neutral text-transition max-md:hidden"
             >
               trails.io
             </Link>
@@ -180,6 +190,7 @@ const AdminNav = ({
                   key={index}
                   text={nav.text}
                   iconName={nav.iconName}
+                  // routeTo={nav.routeTo}
                   routeTo={nav.routeTo}
                   activeRoute={activeRoute}
                 />
@@ -188,8 +199,9 @@ const AdminNav = ({
           </div>
         </div>
 
-        <div>
+        <div className="flex max-lg:flex-col flex-row justify-between gap-4">
           <UserButton activeRoute={activeRoute} />
+          <SignOutButton />
         </div>
       </div>
     </>

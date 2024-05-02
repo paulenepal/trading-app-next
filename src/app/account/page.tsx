@@ -1,14 +1,12 @@
-'use client'
+'use client';
 
-import Icon from "@/components/common/icon"
-
-import UserLayoutProvider from "@/components/providers/UserLayoutProvider"
+import MainContentLayout from '@/components/providers/MainContentLayout';
+import SharedLayoutProvider from '@/components/providers/SharedLayoutProvider';
 
 export default function Account() {
   return (
-    <UserLayoutProvider>
-        
-    asdsa
-    </UserLayoutProvider>
-  )
+    <SharedLayoutProvider>
+      <MainContentLayout>asdsa</MainContentLayout>
+    </SharedLayoutProvider>
+  );
 }

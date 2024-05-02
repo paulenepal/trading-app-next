@@ -114,12 +114,9 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
 
   const handleViewPassword = () => {
     setViewPassword(!viewPassword);
-    console.log(error);
-    console.log(errorMessage);
   };
 
   const onSubmit: SubmitHandler<SIGN_IN_INPUT> = (data) => {
-    console.log(data);
     handleSignin(data);
     setTimeout(() => (setErrorMessage(null), setError(false)), 5000);
   };
@@ -140,7 +137,6 @@ const SignInForm = ({ type }: ONBOARDING_PROPS) => {
       sessionStorage.setItem('token', userHeader);
       setError(false);
       setErrorMessage(null);
-      console.log(userData.role, userData)
       userData.role === 'pending_trader' || userData.role === 'trader' ? router.push('/dashboard') : router.push('/admin');
     } catch (error) {
       setError(true);

@@ -100,7 +100,8 @@ export const AssetColumn = [
 
 export const StockColumn = [
   { key:'symbol', label: 'Stocks' },
-  { key: 'change', label: 'Change 1D' },
+  { key: 'change', label: 'Change' },
+  { key: 'chart',label: '1D' },
   { key: 'latest_price', label: 'Current Price' },
   { label: 'Trade' }
 ]
@@ -109,4 +110,5 @@ export interface TableProps {
   columns: { key: string; label: string } [];
   rows: any[];
   onClick: (row: StockData) => void;
+  button?: JSX.Element;
 }
