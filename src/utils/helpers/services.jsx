@@ -209,7 +209,6 @@ export const GetStockTransactions = async () => {
       'Accept': 'application/json'
     },
   });
-    console.log((await response))
     return response;
   } catch (error) {
     return error.error_message;

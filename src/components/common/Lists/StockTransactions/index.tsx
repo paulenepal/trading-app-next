@@ -7,11 +7,9 @@ import { FormatTransactionType } from '@/utils/helpers/datatype-formatter';
 
 export default function StockTransactionList({ 
   stocks
-  
 }:{ 
   stocks: any 
 }) {
-  console.log(stocks, 'stocks');
   return (
     <>
       <div className="overflow-x-auto">
