@@ -116,6 +116,38 @@ export const GetGeneralNews = async () => {
   }
 }
 
+export const GetUserOwnedStocks = async () => {
+  try {
+    const token = GetToken();
+    const response = await axios.get(`${API_URL}/stocks`, {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response.data; 
+  } catch (error) {
+    throw new Error(error.message); 
+  }
+}
+
+export const GetStockDetails = async (symbol) => {
+  try {
+    const token = GetToken();
+    const response = await axios.get(`${API_URL}/watchlist/${symbol}`, {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    console.log(response.data);
+    return response.data; 
+  } catch (error) {
+    throw new Error(error.message); 
+  }
+}
+
+
 export const HandleSignOut = async () => {
   try {
     const token = GetToken();

@@ -36,7 +36,7 @@ export default function SideNavigation({ type }: { type: string }) {
         const user = GetUserInfo();
         setUserInfo(user);
       }
-      const user = updateUserInfo(userInfo.id);
+      const user = updateUserInfo(userInfo?.id);
       setUserInfo(user);
       console.info('Updated User Info')
     }, 10000);
