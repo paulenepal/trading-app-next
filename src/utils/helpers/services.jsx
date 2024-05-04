@@ -114,7 +114,7 @@ export const GetGeneralNews = async () => {
   } catch (error) {
     return error.error_message;
   }
-}
+};
 
 export const HandleSignOut = async () => {
   try {
@@ -133,7 +133,7 @@ export const HandleSignOut = async () => {
   } catch (error) {
     return error.error_message;
   }
-}
+};
 
 
 // User Balances
@@ -152,7 +152,7 @@ export const GetUserBalances = async () => {
   } catch (error) {
     return error.error_message;
   }
-}
+};
 
 export const DepositFunds = async (amount, userToken) => {
   try {
@@ -207,8 +207,9 @@ export const GetBalanceTransactions = async (type) => {
   } catch (error) {
     return error.error_message;
   }
-}
+};
 
+// Get Stock Transactions
 export const GetStockTransactions = async () => {
   try {
     const token = GetToken();
@@ -223,4 +224,174 @@ export const GetStockTransactions = async () => {
   } catch (error) {
     return error.error_message;
   }
-}
+};
+
+// Buy Stocks Service
+export const BuyService = async (transactionData) => {
+  try {
+    const token = GetToken();
+    const response = axios.post(`${API_URL}/transactions/buy`,
+    {
+      transaction: transactionData
+    },
+    {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+};
+
+// Sell Stocks Service
+export const SellService = async (transactionData) => {
+  try {
+    const token = GetToken();
+    const response = axios.post(`${API_URL}/transactions/sell`,
+    {
+      transaction: transactionData
+    },
+    {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+};
+
+// == ADMIN SERVICES == //
+
+// Create User
+export const CreateUserService = async (userData) => {
+  try {
+    const token = GetToken();
+    const response = axios.post(`${API_URL}/admin/users`,
+    {
+      user: userData
+    },
+    {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+};
+
+// Edit User
+export const EditUSerService = async (id, userData) => {
+  try {
+    const token = GetToken();
+    const response = axios.post(`${API_URL}/admin/users/${id}`,
+    {
+      user: userData
+    },
+    {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+};
+
+// Get User Details
+export const GetUserDetails = async (id) => {
+  try {
+    const token = GetToken();
+    const response = axios.get(`${API_URL}/admin/users/${id}`,
+    {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+};
+
+// Get All Users
+export const GetAllTraders = async () => {
+  try {
+    const token = GetToken();
+    const response = axios.get(`${API_URL}/admin/users/`,
+    {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+};
+
+// Get All Pending Traders
+export const GetPendingTraders = async () => {
+  try {
+    const token = GetToken();
+    const response = axios.get(`${API_URL}/admin/user_approvals`,
+    {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+};
+
+// Approve A Pending Trader
+export const ApproveUserService = async (id) => {
+  try {
+    const token = GetToken();
+    const response = axios.post(`${API_URL}/admin/user_approvals/${id}`,
+    {},
+    {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+};
+
+// Get All User Transactions
+export const GetAllTransactions = async () => {
+  try {
+    const token = GetToken();
+    const response = axios.get(`${API_URL}/admin/user_transactions`,
+    {
+      headers: {
+        'authorization': `${token}`,
+        'Accept': 'application/json'
+      },
+    });
+    return response;
+  } catch (error) {
+    return error.error_message;
+  }
+};
+
+
