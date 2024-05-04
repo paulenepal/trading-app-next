@@ -4,64 +4,10 @@ export interface StockData {
   change: number;
   change_percent: string;
   company_name: string;
-  ohlc: OhlcData;
-  historical_prices: HistoricalPrice[];
   logo: string;
-  chart: ChartData[];
   news: News;
 }
   
-export interface OhlcData {
-  close: {
-    price: number;
-    time: string;
-  };
-  open: {
-    price: number;
-    time: string;
-  };
-  high: number;
-  low: number;
-}
-
-export interface HistoricalPrice {
-  close_dollar: string;
-  close: number;
-  high_dollar: string;
-  high: number;
-  low_dollar: string;
-  low: number;
-  open_dollar: string;
-  open: number;
-  change_over_time: number;
-  change_over_time_s: string;
-  u_open: number;
-  u_open_dollar: string;
-  u_close: number;
-  u_close_dollar: string;
-  u_high: number;
-  u_high_dollar: string;
-  u_low: number;
-  u_low_dollar: string;
-  u_volume: number;
-  change_percent: number;
-  change_percent_s: string;
-  volume: number;
-  date: string;
-  label: string;
-  change: number;
-}
-
-export interface ChartData {
-  change_percent: number;
-  change_percent_s: string;
-  change_over_time: number;
-  date: string;
-  close: number;
-  volume: number;
-  change: number;
-}
-
 export interface News {
   language: string;
   paywalled: boolean;
@@ -111,4 +57,19 @@ export interface TableProps {
   rows: any[];
   onClick: (row: StockData) => void;
   button?: JSX.Element;
+}
+
+export interface TransactionData {
+  symbol: string; 
+  price: number;
+  quantity: number;
+  transaction_type: number;
+}
+
+export interface TradeButtonProps {
+  transactionData: TransactionData;
+}
+
+export interface BUY_INPUT {
+  quantity: number;
 }
