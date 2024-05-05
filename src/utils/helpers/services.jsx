@@ -224,6 +224,26 @@ export const WithdrawFunds = async (amount, userToken) => {
   }
 };
 
+export const BuyStock = async (data, userToken) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/transactions/buy`,
+      {transaction: data},
+      {
+        headers: {
+          'authorization': userToken,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    console.log(response)
+    return response;
+  } catch (error) {
+    return error.response.data.error_message;
+  }
+}
+
 // types 2: Deposit, 3: Withdraw
 export const GetBalanceTransactions = async (type) => {
   try {

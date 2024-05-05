@@ -36,12 +36,12 @@ export default function DepositModal({
   return (
     <dialog id="deposit_modal" className="modal modal-bottom sm:modal-middle">
       <div className="modal-box h-fit flex flex-col justify-between">
-        <div>
+        <div className='text-left'>
           <h3 className="font-bold text-lg flex flex-row gap-2">
             <Icon iconName="arrow-down-circle-line" />
             Deposit Balance
           </h3>
-          <p className="py-4">Please enter your desired amount of deposit</p>
+          <p className="py-4 important">Please enter your desired amount of deposit</p>
         </div>
 
         <form
