@@ -5,6 +5,7 @@ import React from 'react';
 import { GetToken, GetStockDetails, BuyStock } from '@/utils/helpers/services';
 import { openModal } from '@/utils/helpers/modalcontrols';
 import BuyStocksModal from '@/components/common/Modals/BuyStocksModal';
+import SellStocksModal from '@/components/common/Modals/SellStocksModal';
 
 export default function OwnedStocks({
   userStocks,
@@ -75,9 +76,15 @@ export default function OwnedStocks({
                     >
                       Buy
                     </button>
-                    <button className="btn btn-primary ml-2">Sell</button>
+                    <button 
+                      className="btn btn-primary ml-2"
+                      onClick={() => openModal(`${stock.symbol}_modal_sell`)}
+                    >
+                      Sell
+                    </button>
                   </td>
                   <BuyStocksModal stock={stock} key={stock.symbol} updateStocks={fetchStocks} />
+                  <SellStocksModal stock={stock} key={`${stock.symbol}_sell`} updateStocks={fetchStocks} />
                 </tr>
               ))
             ) : userStocks.data === undefined && !loading ? (

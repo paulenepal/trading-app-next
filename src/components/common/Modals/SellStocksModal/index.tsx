@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import Icon from '@/components/common/icon';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { BUY_STOCKS_INPUT } from '@/utils/types/balancetypes';
+import { SELL_STOCKS_INPUT } from '@/utils/types/balancetypes';
 
-import { BuyStock, GetToken } from '@/utils/helpers/services';
+import { SellStock, GetToken } from '@/utils/helpers/services';
 
 import FormErrorMessage from '@/components/common/ErrorMessage';
 import { closeModal } from '@/utils/helpers/modalcontrols';
 
-export default function BuyStocksModal({
+export default function SellStocksModal({
   stock,
   updateStocks,
 }: {
@@ -22,7 +22,7 @@ export default function BuyStocksModal({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<BUY_STOCKS_INPUT>({
+  } = useForm<SELL_STOCKS_INPUT>({
     criteriaMode: 'all',
   });
 
@@ -31,24 +31,24 @@ export default function BuyStocksModal({
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const onSubmit: SubmitHandler<BUY_STOCKS_INPUT> = (data) => {
+  const onSubmit: SubmitHandler<SELL_STOCKS_INPUT> = (data) => {
     reset();
     data.quantity = parseInt(data.quantity);
     data.symbol = stockdata.symbol
-    data.transaction_type = 0
-    handleStockBuy(data);
-    closeModal(`${stockdata.symbol}_modal`);
+    data.transaction_type = 1
+    handleStockSell(data);
+    closeModal(`${stockdata.symbol}_modal_sell`);
     setTimeout(() => (setErrorMessage(null), setError(false)), 5000);
   };
 
-  const handleStockBuy = async (data: any) => {
+  const handleStockSell = async (data: any) => {
     try {
       const token = GetToken();
       if (token) {
-        const response = await BuyStock({
+        const response = await SellStock({
           symbol: stockdata.symbol,
           quantity: data.quantity,
-          transaction_type: 0,
+          transaction_type: 1,
         }, token);
         if (response) {
           setErrorMessage('Stocks bought successfully');
@@ -65,12 +65,12 @@ export default function BuyStocksModal({
   }
 
   return (
-    <dialog id={`${stockdata.symbol}_modal`} className="modal modal-bottom sm:modal-middle">
+    <dialog id={`${stockdata.symbol}_modal_sell`} className="modal modal-bottom sm:modal-middle">
       <div className="modal-box h-fit flex flex-col justify-between">
         <div>
           <h3 className="font-bold text-lg flex flex-row gap-2">
             <Icon iconName="arrow-down-circle-line" />
-            Buy {stockdata.symbol}
+            Sell {stockdata.symbol}
           </h3>
           <p className="py-4 mb-2">Please enter your desired quantity</p>
         </div>
@@ -96,8 +96,8 @@ export default function BuyStocksModal({
                   message: 'Atleast 1 stock is required',
                 },
                 max: {
-                  value: 500,
-                  message: 'Maximum 500 stocks can be bought at a time',
+                  value: stockdata.quantity,
+                  message: `Maximum ${stockdata.quantity} stocks can be bought at a time`,
                 },
               })}
             />
@@ -122,14 +122,14 @@ export default function BuyStocksModal({
           ) : null}
           <input
             type="submit"
-            value="Buy Stocks"
+            value="Sell Stocks"
             className="btn btn-primary text-primary-content"
           />
         </form>
 
         <div className="modal-action">
           <form method="dialog">
-            <button className="btn" onClick={() => {closeModal(`${stockdata.symbol}_modal`)}}>
+            <button className="btn" onClick={() => {closeModal(`${stockdata.symbol}_modal_sell`)}}>
               Close
             </button>
           </form>
