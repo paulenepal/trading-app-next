@@ -35,8 +35,6 @@ export default function Page({ params }: { params: {company: string}}) {
     fetchStock();
   }, [params.company]);
 
-  console.log(stock);
-
   const formattedChartData = stock.historical_prices ? stock.historical_prices.map((item) => ({
     date: item.date,
     open: item.open,
@@ -45,9 +43,6 @@ export default function Page({ params }: { params: {company: string}}) {
     close: item.close,
     volume: item.volume
   })) : [];
-
-  // console.log(formattedChartData);
-
 
   return (
     <UserLayoutProvider>

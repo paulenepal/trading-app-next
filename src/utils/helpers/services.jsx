@@ -140,7 +140,6 @@ export const GetStockDetails = async (symbol) => {
         'Accept': 'application/json'
       },
     });
-    console.log(response.data);
     return response.data; 
   } catch (error) {
     throw new Error(error.message); 
@@ -237,7 +236,6 @@ export const BuyStock = async (data, userToken) => {
         }
       }
     );
-    console.log(response)
     return response;
   } catch (error) {
     return error.response.data.error_message;
@@ -257,7 +255,6 @@ export const SellStock = async (data, userToken) => {
         }
       }
     );
-    console.log(response)
     return response;
   } catch (error) {
     return error.response.data.error_message;
