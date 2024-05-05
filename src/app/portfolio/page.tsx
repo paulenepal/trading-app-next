@@ -9,14 +9,19 @@ import { GetToken, GetUserInfo, GetUserOwnedStocks } from '@/utils/helpers/servi
 
 export default function Portfolio() {
   const [userStocks, setUserStocks] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const fetchStocks = async () => {
     try {
       const token = GetToken();
       if (token) {
+        // const response = await GetUserOwnedStocks(token);
+
+        // setUserStocks(response);
+        // console.log(response)
         const response = await GetUserOwnedStocks(token);
         setUserStocks(response);
-        console.log(response)
+        setLoading(false);
       } else {
         console.error("User not logged in");
       }
@@ -35,7 +40,7 @@ export default function Portfolio() {
     <UserLayoutProvider>
       <MainContentLayout>
         <h1 className="text-2xl font-bold text-gray-900">{UserInfo?.first_name} {UserInfo?.last_name}&apos;s Portfolio</h1>
-        <OwnedStocks userStocks={userStocks}/>
+        <OwnedStocks userStocks={userStocks} loading />
       </MainContentLayout>
     </UserLayoutProvider>
   )

@@ -5,9 +5,11 @@ import React from 'react'
 import { GetToken, GetStockDetails } from '@/utils/helpers/services';
 
 export default function OwnedStocks({
-  userStocks
+  userStocks,
+  loading
 }:{
   userStocks: any
+  loading: boolean
 }) {
 
   const fetchStockDetails = async (symbol: string) => {
@@ -23,7 +25,7 @@ export default function OwnedStocks({
     };
   };
 
-  console.log(fetchStockDetails('NFLX'));
+
   
   return (
     <>
@@ -74,13 +76,13 @@ export default function OwnedStocks({
               </tr>
             ))
           ) : (
-            userStocks.data === undefined ? (
+            (userStocks.data === undefined && !loading) ? (
               <tr>
                 <td colSpan={7} className="text-center">No stocks found</td>
               </tr>
             ) : (
               <tr>
-                <td colSpan={7} className="text-center">Loading...</td>
+                <td colSpan={7} className="text-center">Loading Assets...</td>
               </tr>
             )
           )}
