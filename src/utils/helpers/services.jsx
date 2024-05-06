@@ -140,7 +140,6 @@ export const GetStockDetails = async (symbol) => {
         'Accept': 'application/json'
       },
     });
-    console.log(response.data);
     return response.data; 
   } catch (error) {
     throw new Error(error.message); 
@@ -223,6 +222,44 @@ export const WithdrawFunds = async (amount, userToken) => {
     return error.response.data.error_message;
   }
 };
+
+export const BuyStock = async (data, userToken) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/transactions/buy`,
+      {transaction: data},
+      {
+        headers: {
+          'authorization': userToken,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return response;
+  } catch (error) {
+    return error.response.data.error_message;
+  }
+}
+
+export const SellStock = async (data, userToken) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/transactions/sell`,
+      {transaction: data},
+      {
+        headers: {
+          'authorization': userToken,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return response;
+  } catch (error) {
+    return error.response.data.error_message;
+  }
+}
 
 // types 2: Deposit, 3: Withdraw
 export const GetBalanceTransactions = async (type) => {

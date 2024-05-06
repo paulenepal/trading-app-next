@@ -11,6 +11,11 @@ import {
   DepositFunds,
   WithdrawFunds,
 } from '@/utils/helpers/services';
+
+import {
+  openModal,
+  closeModal,
+} from '@/utils/helpers/modalcontrols';
 import MainContentLayout from '@/components/providers/MainContentLayout';
 import UserLayoutProvider from '@/components/providers/UserLayoutProvider';
 import DepositModal from '@/components/common/Modals/DepositModal';
@@ -22,24 +27,6 @@ export default function Wallet() {
 
   const [switchTab, setSwitchTab] = useState('ALL');
   const [activeTab, setActiveTab] = useState('ALL');
-
-  const openModal = (modalName: string) => {
-    const modal = document.getElementById(modalName) as HTMLDialogElement;
-    if (modal && typeof modal.showModal === 'function') {
-      modal.showModal();
-    } else {
-      console.error('Modal not found');
-    }
-  };
-
-  const closeModal = (modalName: string) => {
-    const modal = document.getElementById(modalName) as HTMLDialogElement;
-    if (modal && typeof modal.close === 'function') {
-      modal.close();
-    } else {
-      console.error('Modal not found');
-    }
-  };
 
   const onPressDeposit = async ({ amount }: { amount: number }) => {
     try {

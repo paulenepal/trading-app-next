@@ -5,18 +5,30 @@ export interface StockData {
   change_percent: string;
   company_name: string;
   logo: string;
-  news: News;
+  news?: News;
+  description: string;
+  website: string;
+  ceo: string;
+  exchange: string;
+  employees: number;
+  historical_prices?: HistoricalPrice[];
+}
+
+interface HistoricalPrice {
+  date: string;
+  open: number;
+  low: number;
+  high: number;
+  close: number;
+  volume: number;
 }
   
-export interface News {
-  language: string;
-  paywalled: boolean;
+interface News {
   datetime: string;
   headline: string;
   source: string;
   url: string;
   summary: string;
-  related: string[];
   image: string;
 }
 

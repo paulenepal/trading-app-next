@@ -10,9 +10,10 @@ import StockDetailsCard from "@/components/common/Cards/StockDetailsCard";
 import Stonk from "@/components/resources/market/CandleStick";
 import TradeButton from "@/components/common/Buttons/Trade";
 import StockDetailsCardPlaceholder from "@/components/common/Placeholders/StockDetailsPlaceholder";
+import { StockData } from "@/utils/types/stocktypes";
 
 export default function Page({ params }: { params: {company: string}}) {
-  const [stock, setStock] = useState([]);
+  const [stock, setStock] = useState<StockData | null>(null);
   const [loading, setLoading] = useState(true);
 
   const stockName = capitalize(params.company)
@@ -36,8 +37,6 @@ export default function Page({ params }: { params: {company: string}}) {
     };
     fetchStock();
   }, [params.company]);
-
-  console.log(stock);
 
   const formattedChartData = stock.historical_prices ? stock.historical_prices.map((item) => ({
     date: item.date,
@@ -87,10 +86,7 @@ export default function Page({ params }: { params: {company: string}}) {
           </>
         )}
 
-
-
       </MainContentLayout>
     </UserLayoutProvider>
   );
 };
-
