@@ -13,7 +13,7 @@ import StockDetailsCardPlaceholder from "@/components/common/Placeholders/StockD
 import { StockData } from "@/utils/types/stocktypes";
 
 export default function Page({ params }: { params: {company: string}}) {
-  const [stock, setStock] = useState<StockData | null>(null);
+  const [stock, setStock] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const stockName = capitalize(params.company)
