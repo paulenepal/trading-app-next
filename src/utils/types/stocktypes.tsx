@@ -11,18 +11,8 @@ export interface StockData {
   ceo: string;
   exchange: string;
   employees: number;
-  historical_prices?: HistoricalPrice[];
 }
 
-interface HistoricalPrice {
-  date: string;
-  open: number;
-  low: number;
-  high: number;
-  close: number;
-  volume: number;
-}
-  
 interface News {
   datetime: string;
   headline: string;
