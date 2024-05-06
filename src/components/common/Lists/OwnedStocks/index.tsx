@@ -39,7 +39,7 @@ export default function OwnedStocks({
               <td>Company</td>
               <td>Quantity</td>
               <td>Latest Market Price</td>
-              <td>Profit Loss</td>
+              <td>Profit/Loss</td>
               <td>Investment Value</td>
               <td>Actions</td>
             </tr>
