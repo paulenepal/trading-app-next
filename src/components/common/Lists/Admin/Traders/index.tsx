@@ -1,5 +1,7 @@
 import React from "react";
 import { firstLetter } from "@/utils/helpers/name-formatter";
+import { openModal } from "@/utils/helpers/modalcontrols";
+import UserDetailsModal from "@/components/common/Modals/UserDetailsModal";
 
 export default function Traders ( { traders, loading, buttonType } : { traders: any, loading: boolean, buttonType: any}) {
 
@@ -53,14 +55,20 @@ export default function Traders ( { traders, loading, buttonType } : { traders: 
                     : ''}
                 </td>
                 <th>
-                  <button className="btn btn-ghost btn-xs">{buttonType}</button>
+                  <button 
+                    className="btn btn-ghost btn-xs"
+                    onClick={() => openModal(`${trader.id}_modal`)}
+                  >
+                    {buttonType}
+                  </button>
                 </th>
+                <UserDetailsModal userId={trader.id} />
               </tr>
             ))
           ) : traders == undefined && !loading? (
             <tr>
                 <td colSpan={7} className="text-center">
-                  No Transactions found.
+                  No Traders found.
                 </td>
               </tr>
             ) : (
