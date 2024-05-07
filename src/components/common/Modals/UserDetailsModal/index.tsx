@@ -48,7 +48,14 @@ export default function UserDetailsModal({ userId } : {userId: string}) {
               </tr>
               <tr>
                 <td className="font-semibold">Email Address</td>
-                <td>{userDetails?.email}</td>
+                <td>
+                  <p>{userDetails?.email}</p>
+                  <p className={`badge badge-ghost badge-sm ${userDetails?.confirmed_email === true ? 'text-primary' : 'text-error'}`}>
+                    {userDetails?.confirmed_email === true
+                      ? 'Confirmed Email'
+                      : 'Pending Confirmation'}
+                  </p>
+                </td>
               </tr>
               <tr>
                 <td className="font-semibold">Username</td>
@@ -58,9 +65,9 @@ export default function UserDetailsModal({ userId } : {userId: string}) {
                 <td className="font-semibold">Status</td>
                 <td>
                   {userDetails?.role === 'pending_trader' || userDetails?.role === null
-                    ? 'Pending Trader'
+                    ? 'Pending Account'
                     : userDetails?.role === 'trader'
-                    ? 'Approved Trader'
+                    ? 'Approved Account'
                     : ''}
                 </td>
               </tr>
