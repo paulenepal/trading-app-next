@@ -16,7 +16,6 @@ export default function Accounts() {
       if (token) {
         const response = await GetAllTraders(token);
         setTraders(response.data);
-        console.log(response.data);
         setLoading(false);
       } else {
         console.error('Failed to fetch active users.')
@@ -35,7 +34,7 @@ export default function Accounts() {
     <SharedLayoutProvider>
       <MainContentLayout>
       <h1 className="text-2xl font-bold text-gray-900">User Accounts</h1>
-      <Traders traders={traders} loading={loading} buttonType={'Details'}/>
+      <Traders traders={traders} loading={loading} />
       </MainContentLayout>
     </SharedLayoutProvider>
   )
