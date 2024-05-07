@@ -16,7 +16,6 @@ export default function Accounts() {
       if (token) {
         const response = await GetAllTransactions(token);
         setUserTransactions(response.data);
-        console.log(response.data);
         setLoading(false);
       } else {
         console.error('Failed to fetch active users.')
