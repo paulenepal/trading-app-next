@@ -38,7 +38,6 @@ export default function Portfolio() {
         <h1 className="text-2xl font-bold text-gray-900">{UserInfo?.first_name} {UserInfo?.last_name}&apos;s Portfolio</h1>
         <OwnedStocks userStocks={userStocks} updateStocks={fetchStocks} loading />
       </MainContentLayout>
-      
     </UserLayoutProvider>
   )
 }
