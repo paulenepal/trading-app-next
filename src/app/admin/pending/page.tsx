@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import MainContentLayout from "@/components/providers/MainContentLayout"
 import SharedLayoutProvider from "@/components/providers/SharedLayoutProvider"
 import { GetPendingTraders, GetToken } from '@/utils/helpers/services'
-import ActiveTraders from '@/components/common/Lists/Admin/Traders'
+import PendingTraders from '@/components/common/Lists/Admin/PendingTraders'
 
 export default function Accounts() {
   const [traders, setTraders] = useState([]);
@@ -16,7 +16,6 @@ export default function Accounts() {
       if (token) {
         const response = await GetPendingTraders(token);
         setTraders(response.data);
-        console.log(response.data);
         setLoading(false);
       } else {
         console.error('Failed to fetch active users.')
@@ -35,7 +34,7 @@ export default function Accounts() {
     <SharedLayoutProvider>
       <MainContentLayout>
       <h1 className="text-2xl font-bold text-gray-900">Pending Users</h1>
-      <ActiveTraders traders={traders} loading={loading} buttonType={'Approve'} />
+      <PendingTraders traders={traders} loading={loading} />
       </MainContentLayout>
     </SharedLayoutProvider>
   )
