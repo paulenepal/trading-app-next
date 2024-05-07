@@ -432,7 +432,7 @@ export const GetPendingTraders = async () => {
 export const ApproveUserService = async (id) => {
   try {
     const token = GetToken();
-    const response = axios.post(`${API_URL}/admin/user_approvals/${id}`,
+    const response = axios.put(`${API_URL}/admin/user_approvals/${id}`,
     {},
     {
       headers: {
