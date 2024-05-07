@@ -3,7 +3,7 @@ import { firstLetter } from "@/utils/helpers/name-formatter";
 import { openModal } from "@/utils/helpers/modalcontrols";
 import UserDetailsModal from "@/components/common/Modals/UserDetailsModal";
 
-export default function Traders ( { traders, loading, buttonType } : { traders: any, loading: boolean, buttonType: any}) {
+export default function Traders ( { traders, loading } : { traders: any, loading: boolean}) {
 
   return (
     <>
@@ -44,14 +44,14 @@ export default function Traders ( { traders, loading, buttonType } : { traders: 
                   <span className={`badge badge-ghost badge-sm ${trader.confirmed_email === true ? 'text-primary' : 'text-error'}`}>
                     {trader.confirmed_email === true
                       ? 'Confirmed Email'
-                      : 'For Email Confirmation'}
+                      : 'Pending Email Confirmation'}
                   </span>
                 </td>
                 <td>
                   {trader.role === 'pending_trader' || trader.role === null
-                    ? 'Pending Trader'
+                    ? 'Pending Account'
                     : trader.role === 'trader'
-                    ? 'Approved Trader'
+                    ? 'Approved Account'
                     : ''}
                 </td>
                 <th>
@@ -59,7 +59,7 @@ export default function Traders ( { traders, loading, buttonType } : { traders: 
                     className="btn btn-ghost btn-xs"
                     onClick={() => openModal(`${trader.id}_modal`)}
                   >
-                    {buttonType}
+                    Details
                   </button>
                 </th>
                 <UserDetailsModal userId={trader.id} />
