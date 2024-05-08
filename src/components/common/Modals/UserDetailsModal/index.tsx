@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { GetToken, GetUserDetails } from "@/utils/helpers/services";
-import { closeModal } from "@/utils/helpers/modalcontrols";
+import { openModal, closeModal } from "@/utils/helpers/modalcontrols";
 import { formatBirthdate } from "@/utils/helpers/date-formatter";
 
 import Icon from "../../icon";
+import EditUserModal from "../EditUserModal";
 
 export default function UserDetailsModal({ userId } : {userId: string}) {
   const [userDetails, setUserDetails] = useState<any>(null);
@@ -28,62 +29,68 @@ export default function UserDetailsModal({ userId } : {userId: string}) {
   }, [userId]);
 
   return (
-    <>
-    <dialog id={`${userDetails?.id}_modal`} className="modal modal-bottom sm:modal-middle">
-      <div className="modal-box h-fit flex flex-col justify-between">
-        <div>
-          <h3 className="font-bold text-lg flex flex-row gap-2">
-            <Icon iconName="user-5-fill" />
-            User ID: TX00{userDetails?.id}
-          </h3>
-          <table className="table mt-6">
-            <tbody>
-              <tr>
-                <td className="font-semibold">Full Name</td>
-                <td>{userDetails?.first_name} {userDetails?.last_name}</td>
-              </tr>
-              <tr>
-                <td className="font-semibold">Birthday</td>
-                <td>{userDetails && formatBirthdate(userDetails.birthday)}</td>
-              </tr>
-              <tr>
-                <td className="font-semibold">Email Address</td>
-                <td>
-                  <p>{userDetails?.email}</p>
-                  <p className={`badge badge-ghost badge-sm ${userDetails?.confirmed_email === true ? 'text-primary' : 'text-error'}`}>
-                    {userDetails?.confirmed_email === true
-                      ? 'Confirmed Email'
-                      : 'Pending Confirmation'}
-                  </p>
-                </td>
-              </tr>
-              <tr>
-                <td className="font-semibold">Username</td>
-                <td>{userDetails?.username}</td>
-              </tr>
-              <tr>
-                <td className="font-semibold">Status</td>
-                <td>
-                  {userDetails?.role === 'pending_trader' || userDetails?.role === null
-                    ? 'Pending Account'
-                    : userDetails?.role === 'trader'
-                    ? 'Approved Account'
-                    : ''}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          
+    <div>
+      <dialog id={`${userDetails?.id}_modal`} className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box h-fit flex flex-col justify-between">
+          <div>
+            <h3 className="font-bold text-lg flex flex-row gap-2">
+              <Icon iconName="user-heart-line" />
+              User ID: TX00{userDetails?.id}
+            </h3>
+            <table className="table mt-6">
+              <tbody>
+                <tr>
+                  <td className="font-semibold">Full Name</td>
+                  <td>{userDetails?.first_name} {userDetails?.last_name}</td>
+                </tr>
+                <tr>
+                  <td className="font-semibold">Birthday</td>
+                  <td>{userDetails && formatBirthdate(userDetails.birthday)}</td>
+                </tr>
+                <tr>
+                  <td className="font-semibold">Email Address</td>
+                  <td>
+                    <p>{userDetails?.email}</p>
+                    <p className={`badge badge-ghost badge-sm ${userDetails?.confirmed_email === true ? 'text-primary' : 'text-error'}`}>
+                      {userDetails?.confirmed_email === true
+                        ? 'Confirmed Email'
+                        : 'Pending Confirmation'}
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="font-semibold">Username</td>
+                  <td>{userDetails?.username}</td>
+                </tr>
+                <tr>
+                  <td className="font-semibold">Status</td>
+                  <td className={userDetails?.role === 'pending_trader' || userDetails?.role === null ? 'text-error' : ''}>
+                    {userDetails?.role === 'pending_trader' || userDetails?.role === null
+                      ? 'Pending Account'
+                      : userDetails?.role === 'trader'
+                      ? 'Approved Account'
+                      : ''}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+          </div>
+          <div className="modal-action">
+            <form method="dialog">
+              <button className="btn bg-accent" onClick={() => {openModal(`${userDetails?.id}_edit_modal`)}}>
+                Edit Details
+              </button>
+            </form>
+            <form method="dialog">
+              <button className="btn" onClick={() => {closeModal(`${userDetails?.id}_modal`)}}>
+                Close
+              </button>
+            </form>
+          </div>
         </div>
-        <div className="modal-action">
-          <form method="dialog">
-            <button className="btn" onClick={() => {closeModal(`${userDetails?.id}_modal`)}}>
-              Close
-            </button>
-          </form>
-        </div>
-      </div>
-    </dialog>
-    </>
+      </dialog>
+      <EditUserModal user={userDetails} key={userDetails?.id}/>
+    </div>
   );
 };
