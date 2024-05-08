@@ -358,10 +358,10 @@ export const CreateUserService = async (userData) => {
 };
 
 // Edit User
-export const EditUSerService = async (id, userData) => {
+export const EditUserService = async (id, userData) => {
   try {
     const token = GetToken();
-    const response = axios.post(`${API_URL}/admin/users/${id}`,
+    const response = axios.put(`${API_URL}/admin/users/${id}`,
     {
       user: userData
     },
