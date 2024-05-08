@@ -27,7 +27,7 @@ export default function PendingTraders ( { traders, loading } : { traders: any, 
                 <td>
                 <div className="flex items-center gap-4">
                   <div className="avatar online placeholder">
-                    <div className="bg-primary text-neutral-content rounded-full w-16">
+                    <div className="bg-accent text-neutral-content rounded-full w-16">
                       <span className="text-xl">{firstLetter(trader.first_name)}{firstLetter(trader.last_name)}</span>
                     </div>
                   </div>
@@ -47,10 +47,10 @@ export default function PendingTraders ( { traders, loading } : { traders: any, 
                       : 'For Email Confirmation'}
                   </span>
                 </td>
-                <td>
-                  {trader.role === 'pending_trader' || trader.role === null
+                <td className={trader?.role === 'pending_trader' || trader?.role === null ? 'text-error' : ''}>
+                  {trader?.role === 'pending_trader' || trader?.role === null
                     ? 'Pending Account'
-                    : trader.role === 'trader'
+                    : trader?.role === 'trader'
                     ? 'Approved Account'
                     : ''}
                 </td>

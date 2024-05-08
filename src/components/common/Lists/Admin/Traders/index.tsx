@@ -47,10 +47,10 @@ export default function Traders ( { traders, loading } : { traders: any, loading
                       : 'Pending Email Confirmation'}
                   </span>
                 </td>
-                <td>
-                  {trader.role === 'pending_trader' || trader.role === null
+                <td className={trader?.role === 'pending_trader' || trader?.role === null ? 'text-error' : ''}>
+                  {trader?.role === 'pending_trader' || trader?.role === null
                     ? 'Pending Account'
-                    : trader.role === 'trader'
+                    : trader?.role === 'trader'
                     ? 'Approved Account'
                     : ''}
                 </td>
