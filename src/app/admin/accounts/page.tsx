@@ -5,6 +5,8 @@ import MainContentLayout from "@/components/providers/MainContentLayout"
 import SharedLayoutProvider from "@/components/providers/SharedLayoutProvider"
 import { GetAllTraders, GetToken } from '@/utils/helpers/services'
 import Traders from '@/components/common/Lists/Admin/Traders'
+import CallCreateUserModal from '@/components/common/Buttons/AddButton'
+import EditUserModal from '@/components/common/Modals/EditUserModal'
 
 export default function Accounts() {
   const [traders, setTraders] = useState([]);
@@ -32,10 +34,15 @@ export default function Accounts() {
 
   return (
     <SharedLayoutProvider>
-      <MainContentLayout>
-      <h1 className="text-2xl font-bold text-gray-900">User Accounts</h1>
-      <Traders traders={traders} loading={loading} />
-      </MainContentLayout>
+      <div className='px-6'>
+        <MainContentLayout>
+          <div className='flex flex-row justify-between w-full mb-4'>
+            <h1 className="text-2xl font-bold text-gray-900">User Accounts</h1>
+            <CallCreateUserModal />
+          </div>
+        <Traders traders={traders} loading={loading} />
+        </MainContentLayout>
+      </div>
     </SharedLayoutProvider>
   )
 } 
