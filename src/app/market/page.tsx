@@ -54,10 +54,6 @@ export default function StockMarket() {
       })),
     [stocks]
   );
-  
-  // formattedStocks.forEach((formattedStock, index) => {
-  //   console.log(`formattedStock[${index}]:`, formattedStock);
-  // });
 
   return (
     <SharedLayoutProvider>

@@ -53,3 +53,9 @@
     margin:0;
   }
 }
+
+@layer utilities {
+  .important {
+    text-align: left !important;
+  }
+}

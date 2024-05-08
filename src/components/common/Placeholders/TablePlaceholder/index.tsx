@@ -18,6 +18,13 @@ export default function TablePlaceholder() {
           <div className="skeleton h-4 w-16"></div>
         </div>
       </td>
+
+      <td>
+        <div className="flex items-center gap-4">
+          <div className="skeleton h-6 w-56"></div>
+        </div>
+      </td>
+
       <td>
         <div className="skeleton h-4 w-12"></div>
       </td>

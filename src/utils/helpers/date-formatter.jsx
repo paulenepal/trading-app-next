@@ -32,3 +32,23 @@ export function formatTimePosted(date) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
   return date.toLocaleDateString(undefined, options)
 }
+
+export function formatBirthdate(date) {
+  const [year, month, day] = date.split('-');
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const monthName = monthNames[parseInt(month, 10) - 1];
+  return `${monthName} ${parseInt(day, 10)}, ${year}`;
+}
+
+export function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  const newFormat = {
+    month: 'short',
+    day: '2-digit',
+    year: '2-digit',
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  };
+  return date.toLocaleString('en-US', newFormat);
+}

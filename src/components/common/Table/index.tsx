@@ -2,6 +2,8 @@ import React from 'react';
 import { TableProps } from '@/utils/types/stocktypes';
 import TablePlaceholder from '@/components/common/Placeholders/TablePlaceholder';
 import AreaChartNoGrid from '@/components/resources/market/AreaChartNoGrid';
+import { openModal } from '@/utils/helpers/modalcontrols';
+import BuyStocksModal from '@/components/common/Modals/BuyStocksModal';
 
 export default function Table({ columns, rows, onClick, button }: TableProps) {
   const isLoading = rows.length === 0;
@@ -51,19 +53,18 @@ export default function Table({ columns, rows, onClick, button }: TableProps) {
 
               <td>{`$ ${row.latest_price.toFixed(2)}`}</td>
               <td>
-                {button}
+                <button
+                  className="btn btn-primary shadow-md"
+                  onClick={() => openModal(`${row.symbol}_modal`)}
+                >
+                  Buy
+                </button>
               </td>
+              <BuyStocksModal stock={row} key={row.symbol} updateStocks={() => {}} />
             </tr>
+            
           ))}
         </tbody>
-        {/* foot
-        <tfoot>
-          <tr>
-            {columns.map((column) => (
-              <th key={column.key}>{column.label}</th>
-            ))}
-          </tr>
-        </tfoot> */}
       </table>
     </div>
   );
