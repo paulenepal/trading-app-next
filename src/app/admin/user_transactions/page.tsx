@@ -32,10 +32,12 @@ export default function Accounts() {
 
   return (
     <SharedLayoutProvider>
-      <MainContentLayout>
-      <h1 className="text-2xl font-bold text-gray-900">User Transactions</h1>
-      <UserTransactions transactions={userTransactions} loading={loading} />
-      </MainContentLayout>
+      <div className='px-6'>
+        <MainContentLayout>
+        <h1 className="text-2xl font-bold text-gray-900">User Transactions</h1>
+        <UserTransactions transactions={userTransactions} loading={loading} />
+        </MainContentLayout>
+      </div>
     </SharedLayoutProvider>
   )
 } 
