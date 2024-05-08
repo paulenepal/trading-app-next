@@ -32,10 +32,12 @@ export default function Accounts() {
 
   return (
     <SharedLayoutProvider>
-      <MainContentLayout>
-      <h1 className="text-2xl font-bold text-gray-900">Pending Users</h1>
-      <PendingTraders traders={traders} loading={loading} />
-      </MainContentLayout>
+      <div className='px-6'>
+        <MainContentLayout>
+        <h1 className="text-2xl font-bold text-gray-900">Pending Users</h1>
+        <PendingTraders traders={traders} loading={loading} />
+        </MainContentLayout>
+      </div>
     </SharedLayoutProvider>
   )
 } 
