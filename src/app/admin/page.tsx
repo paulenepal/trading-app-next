@@ -9,9 +9,11 @@ import UserCard from "@/components/common/Cards/UserCard";
 export default function AdminDashboard() {
   return (
     <AdminLayoutProvider>
-      <MainContentLayout>
-        Admin Dashboard
-      </MainContentLayout>
+      <div className='px-6'>
+        <MainContentLayout>
+          Admin Dashboard
+        </MainContentLayout>
+      </div>
     </AdminLayoutProvider>
   )
 }
