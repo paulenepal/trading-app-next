@@ -73,3 +73,12 @@ export type {
   SIGN_IN_INPUT,
   SIGN_UP_INPUT
 };
+
+export interface USER_INPUT {
+  email: string
+  first_name: string
+  middle_name: string
+  last_name: string
+  username: string
+  birthday: any
+};
