@@ -34,7 +34,7 @@ export default function Accounts() {
 
   return (
     <SharedLayoutProvider>
-      <div className='px-6'>
+      <div className='px-8 py-2'>
         <MainContentLayout>
           <div className='flex flex-row justify-between w-full mb-4'>
             <h1 className="text-2xl font-bold text-gray-900">User Accounts</h1>
