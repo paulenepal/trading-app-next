@@ -32,7 +32,7 @@ export default function Accounts() {
 
   return (
     <SharedLayoutProvider>
-      <div className='px-6'>
+      <div className='px-8 py-2'>
         <MainContentLayout>
         <h1 className="text-2xl font-bold text-gray-900">Pending Users</h1>
         <PendingTraders traders={traders} loading={loading} />
