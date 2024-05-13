@@ -47,7 +47,7 @@ export default function EditUserModal({ user } : { user: any}) {
       }
     } catch (err) { 
       console.error('Error Updating User:', err);
-      throw err;
+      // throw err;
     }
   }
 
